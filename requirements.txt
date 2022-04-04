@@ -1,5 +1,5 @@
 flask
 flask_login
 datetime
-django.contrib.auth.decorators
+django
 pdfkit
