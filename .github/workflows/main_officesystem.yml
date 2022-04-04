@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'officesystem'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CC9A99247F2845B0BA1CF5FF3BAB653F }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A60C843B09B04CCBA91CAAB0AB11F176 }}
