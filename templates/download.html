@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="row">
+  <div class="col">
+    <form method="POST" action="{{url_for('download_to')}}">
+      <div class="form-row">
+        <div class="col-12 mt-3">
+        <input type="text" class="form-control" name="firstname" placeholder="網址名稱">
+        </div>
+      <div class="col-12 mt-3">
+        <input type="text" class="form-control" name="lastname" placeholder="檔案名稱">
+      </div>
+      <div class="col-12 mt-3">
+        <input type="text" class="form-control" name="password name" placeholder="password name">
+      </div>
+      <div class="col-12 mt-3 pt-3">
+        <button type="#" class="btn btn-primary">下載報表
+        </button>
+      </div>
+      </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
