@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block body %}
+                <!-- Begin Page Content -->
+                <div class="container-fluid text-center">
+
+                    <!-- Page Heading -->
+                    <p class="h1 mb-3 text-gray-800">打卡系統</p>
+                    <p class="h1 mb-3 text-gray-800">上班時間：20:00 ~ 23:00</p>
+                    <!-- Date -->
+                    <span class="h1 text-gray-800" id="Date">2021/09/12</span>
+                    <!-- Content Row -->
+                    <div class="row mt-3">
+
+                        <!-- First Column -->
+                        <div class="col-sm-6 mx-auto">
+
+                            <!-- Time -->
+                            <div class="card shadow mb-5 text-gray-800">
+                                <span class="h1" id="Time">22:02:30</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-3"> </div>
+                        <div class="col-7 col-md-3 mb-3 mx-auto">
+                            <button class="btn btn-lg btn-outline-info w-100">上班/簽到</button>
+                        </div>
+                        <div class="col-7 col-md-3 mx-auto">
+                            <button class="btn btn-lg btn-outline-info w-100">下班/簽退</button>
+                        </div>
+                        <div class="col-md-3"> </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-3"> </div>
+                        <div class="col-7 col-md-3 mb-3 mx-auto">
+                            <button class="btn btn-lg btn-outline-info w-100">請假</button>
+                        </div>
+                        <div class="col-7 col-md-3 mx-auto">
+                            <button class="btn btn-lg btn-outline-info w-100">打卡申訴</button>
+                        </div>
+                        <div class="col-md-3"> </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+{% endblock %}

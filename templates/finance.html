@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% block body %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="mb-5 text-gray-800">財務部</h1>
+
+    <!-- Tales -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h2 class="m-0 text-gray-800">2021-10月預測審批列表</h2>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <div class="row text-left text-md-center">
+                            <div class="col-12 col-md-3 mb-2">
+                                <span class="h4 text-grey-800">部門：行政部</span>
+                            </div>
+                            <div class="col-12 col-md-3 mb-2">
+                                <span class="h4 text-grey-800">類别：費用類</span>
+                            </div>
+                            <div class="col-12 col-md-3 mb-2">
+                                <span class="h4 text-grey-800">日期：2021-10</span>
+                            </div>
+                            <div class="col-12 col-md-3 mb-2">
+                                <span class="h4 text-grey-800">預測總額：10000.00元</span>
+                            </div>
+                        </div>
+
+                        <tr>
+                            <th>序號</th>
+                            <th>提交人</th>
+                            <th>科目</th>
+                            <th>預測金額(元)</th>
+                            <th>總計(元)</th>
+                            <th>狀態</th>
+                            <th>審核人</th>
+                            <th>審核時間</th>
+                            <th>備註</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>侯正成</td>
+                            <td>火箭材料費</td>
+                            <td>1000.00</td>
+                            <td>2000.00</td>
+                            <td class="text-success">通過</td>
+                            <td>劉建佑</td>
+                            <td>2021-10-01 22:10:30</td>
+                            <td></td>
+                            <td class="text-primary">駁回</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>侯正成</td>
+                            <td>火箭材料費</td>
+                            <td>1000.00</td>
+                            <td>2000.00</td>
+                            <td class="text-success">通過</td>
+                            <td>劉建佑</td>
+                            <td>2021-10-01 22:10:30</td>
+                            <td></td>
+                            <td class="text-primary">駁回</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>侯正成</td>
+                            <td>火箭材料費</td>
+                            <td>1000.00</td>
+                            <td>2000.00</td>
+                            <td class="text-success">通過</td>
+                            <td>劉建佑</td>
+                            <td>2021-10-01 22:10:30</td>
+                            <td></td>
+                            <td class="text-primary">駁回</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>侯正成</td>
+                            <td>火箭材料費</td>
+                            <td>1000.00</td>
+                            <td>2000.00</td>
+                            <td class="text-success">通過</td>
+                            <td>劉建佑</td>
+                            <td>2021-10-01 22:10:30</td>
+                            <td></td>
+                            <td class="text-primary">駁回</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>侯正成</td>
+                            <td>火箭材料費</td>
+                            <td>1000.00</td>
+                            <td>2000.00</td>
+                            <td class="text-success">通過</td>
+                            <td>劉建佑</td>
+                            <td>2021-10-01 22:10:30</td>
+                            <td></td>
+                            <td class="text-primary">駁回</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3 text-center">
+
+        <div class="col-7 col-md-2 text-left text-md-center">
+            <span class="h3 text-grey-800">全部審批</span>
+        </div>
+        <div class="col-12 col-md-2 mb-2 text-left text-md-left">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="請輸入審核時間" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <div class="col-12 col-md-2 mb-2 text-left text-md-left">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="請輸入審核人" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <div class="col-md-2 w-100"> </div>
+        
+        <div class="col-6 col-md-1 mb-2 text-left text-md-right">
+            <div class="btn btn-outline-info w-100">通過</div>
+        </div>
+        <div class="col-6 col-md-1 text-left text-md-right">
+            <div class="btn btn-outline-info w-100">駁回</div>
+        </div>
+        <div class="col-12 col-md-2 text-left text-md-left">
+            <div class="btn btn-outline-info w-100">返回列表</div>
+        </div>
+
+    </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Your Website 2020</span>
+        </div>
+    </div>
+</footer>
+<!-- End of Footer -->
+
+
+{% endblock %}

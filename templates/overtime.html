@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+{% block body %}
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <p class="h1 mb-5 text-gray-800">加班申請</p>
+                    
+                    <!-- Content Row -->
+                    <div class="row mb-3 text-center">
+
+                        <div class="col-12 col-md-3 text-left text-md-right">
+                            <span class="h3 text-gray-800 w-100">加班種類：</span>
+                        </div>
+                        <div class="col-12 col-md-8">
+                            <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" aria-label=".form-select-lg example">
+                                <option selected>一般加班</option>
+                                <option value="1"></option>
+                                <option value="2"></option>
+                                <option value="3"></option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <!-- Secomd row -->
+                    <div class="row mb-3 text-center">
+
+                        <div class="col-12 col-md-3 text-left text-md-right">
+                            <span class="h3 text-gray-800 w-100">請假事由：</span>
+                        </div>
+                        <div class="col-12 col-md-8">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="請輸入請假事由" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Third row -->
+                    <div class="row mb-3 text-center">
+
+                        <div class="col-12 col-md-3 text-left text-md-right">
+                            <span class="h3 text-gray-800 w-100">加班別：</span>
+                        </div>
+                        <div class="col-12 col-md-6 text-center text-md-left ">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label h3" for="inlineRadio1">早上加班</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                <label class="form-check-label h3" for="inlineRadio2">中午加班</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                <label class="form-check-label h3" for="inlineRadio3">晚上加班</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4">
+                                <label class="form-check-label h3" for="inlineRadio4">假日加班</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" aria-label=".form-select-lg example">
+                                <option selected>不扣中午</option>
+                                <option value="1">扣中午</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <!-- Forth row -->
+                    <div class="row mb-3 text-center">
+
+                        <div class="col-12 col-md-3 text-left text-md-right">
+                            <span class="h3 text-gray-800 w-100">加班起始時間：</span>
+                        </div>
+
+                        <div class="col-12 col-md-8">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="例:202109172330" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Fifth row -->
+                    <div class="row mb-3 text-center">
+
+                        <div class="col-12 col-md-3 text-left text-md-right">
+                            <span class="h3 text-gray-800 w-100">加班結束時間：</span>
+                        </div>
+
+                        <div class="col-12 col-md-8">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="例:202109180000" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Sixth row -->
+                    <div class="row mb-3 text-center">
+
+                        <div class="col-12 col-md-3 text-left text-md-right">
+                            <span class="h3 text-gray-800 w-100">重複時間：</span>
+                        </div>
+
+                        <div class="col-12 col-md-8 text-md-left text-center">
+                            <span class="h4 text-gray-800 w-100">每週的：</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                <label class="form-check-label h4" for="inlineCheckbox1">一</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                <label class="form-check-label h4" for="inlineCheckbox2">二</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                                <label class="form-check-label h4" for="inlineCheckbox3">三</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
+                                <label class="form-check-label h4" for="inlineCheckbox4">四</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5">
+                                <label class="form-check-label h4" for="inlineCheckbox5">五</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option6">
+                                <label class="form-check-label h4" for="inlineCheckbox6">六</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="option7">
+                                <label class="form-check-label h4" for="inlineCheckbox7">日</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Seventh row -->
+                    <div class="row mb-3 text-center">
+
+                        <div class="col-md-8"></div>
+                        <div class="col-12 col-md-2 text-right">
+                            <span class="h3" id="hours">共計0小時</span>
+                        </div>
+                        <div class="col-12 col-md-2 text-right text-md-left">
+                            <div class="btn btn-outline-info">確認存檔</div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+{% endblock %}

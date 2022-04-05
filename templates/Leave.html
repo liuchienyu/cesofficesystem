@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+{% block body %}
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="mb-5 text-gray-800">請假系統</h1>
+
+                    <!-- Content Row -->
+                    <!-- First row -->
+                    <div class="row mb-3 text-center">
+
+                        <div class="col-6 col-md-3 text-right">
+                            <span class="h4 text-gray-800 w-100">假別：</span>
+                        </div>
+
+                        <div class="col-6 col-md-3">
+                            <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" aria-label=".form-select-lg example">
+                                <option selected>休假</option>
+                                <option value="1">病假</option>
+                                <option value="2">事假</option>
+                                <option value="3">公假</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12 col-md-5">
+                            <div class="input-group">    
+                                <input type="text" class="form-control" placeholder="請輸入公假事由" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Second row -->
+                    <div class="row mb-3 text-center">
+
+                        <div class="col-12 col-md-3 text-left text-md-right">
+                            <span class="h4 text-gray-800 w-100">請假起始日期時間：</span>
+                        </div>
+
+                        <div class="col-12 col-md-8">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="例：2021年9月17日20時0分則輸入202109172000" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Third row -->
+                    <div class="row mb-3 text-center">
+
+                        <div class="col-12 col-md-3 text-left text-md-right">
+                            <span class="h4 text-gray-800 w-100">請假結束日期時間：</span>
+                        </div>
+
+                        <div class="col-12 col-md-8">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="例：2021年9月17日23時30分則輸入202109172330" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Forth row -->
+                    <div class="row mb-3 text-center">
+
+                        <div class="col-12 col-md-3 text-left text-md-right">
+                            <span class="h4 text-gray-800 w-100">請假天數&時數：</span>
+                        </div>
+
+                        <div class="col-12 col-md-8">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="請輸入時數" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Fifth row -->
+                    <div class="row mb-3 text-center">
+
+                        <div class="col-12 col-md-3 text-left text-md-right">
+                            <span class="h4 text-gray-800 w-100">代理人：</span>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="請輸入代理人所屬單位" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="請輸入代理人名稱" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Sixth row -->
+                    <div class="row mb-3 text-center d-flex align-items-center">
+
+                        <div class="col-12 col-md-2 text-left text-md-right">
+                            <span class="h4 text-gray-800 w-100">簽核流程：</span>
+                        </div>
+
+                        <div class="col-12 col-md-8 table-responsive">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr class="h6">
+                                        <th scope="row" class="align-middle">二級(系主任)</th>
+                                        <td class="align-middle">
+                                            <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" aria-label=".form-select-lg example">
+                                                <option selected>執行室</option>
+                                                <option value="1">行政部</option>
+                                                <option value="2">人事部</option>
+                                                <option value="3">資訊部</option>
+                                                <option value="4">財務部</option>
+                                            </select>
+                                            <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" aria-label=".form-select-lg example">
+                                                <option selected>二級(系主任)</option>
+                                                <option value="1"></option>
+                                                <option value="2"></option>
+                                                <option value="3"></option>
+                                                <option value="4"></option>
+                                            </select>
+                                        </th>
+                                    </tr>
+                                
+                                    <tr class="h6">
+                                        <th scope="row" class="align-middle">一級(院長)</th>
+                                        <td class="align-middle">
+                                            <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" aria-label=".form-select-lg example">
+                                                <option selected>執行室</option>
+                                                <option value="1">行政部</option>
+                                                <option value="2">人事部</option>
+                                                <option value="3">資訊部</option>
+                                                <option value="4">財務部</option>
+                                            </select>
+                                            <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" aria-label=".form-select-lg example">
+                                                <option selected>劉建佑</option>
+                                                <option value="1">侯正成</option>
+                                                <option value="2">陳星維</option>
+                                                <option value="3">陳澤榮</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row" class="align-middle">教務行政組</th>
+                                        <td class="align-middle">
+                                            <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" aria-label=".form-select-lg example">
+                                                <option selected>免簽</option>
+                                                <option value="1">需簽核</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row" class="align-middle">人事主任秘書室</th>
+                                        <td class="align-middle">
+                                            <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" aria-label=".form-select-lg example">
+                                                <option selected>免簽</option>
+                                                <option value="1">需簽核</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row" class="align-middle">人事室</th>
+                                        <td class="align-top">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-12 col-md-2 text-right text-md-center">
+                            <div class="btn btn-outline-info">確認存檔</div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+{% endblock %}

@@ -1,9 +1,9 @@
-from flask import Flask,Blueprint, flash,render_template, redirect, url_for, render_template,request, session
+from flask import Flask, Blueprint, flash, render_template, redirect, url_for, render_template, request, session
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from datetime import timedelta
 from django.contrib.auth.decorators import login_required
 import pdfkit
-
+from test_email import sendpaper
 
 app = Flask(__name__)
 login_manager = LoginManager()
@@ -18,6 +18,7 @@ app.permanent_session_lifetime = timedelta(minutes=5)
 class User(UserMixin):
     pass
 
+
 @login_manager.user_loader
 def user_loader(使用者):
     if 使用者 not in users:
@@ -26,6 +27,7 @@ def user_loader(使用者):
     user = User()
     user.id = 使用者
     return user
+
 
 @login_manager.request_loader
 def request_loader(request):
@@ -40,6 +42,7 @@ def request_loader(request):
 
     return user
 
+
 users = {'Me': {'password': 'myself'}}
 
 
@@ -47,53 +50,98 @@ users = {'Me': {'password': 'myself'}}
 def login():
     if request.method == 'GET':
         return render_template("login-a.html")
-    
+
     使用者 = request.form['user_id']
     if (使用者 in users) and (request.form['password'] == users[使用者]['password']):
         user = User()
         user.id = 使用者
         login_user(user)
-        flash(f'{使用者}！歡迎加入草泥馬訓練家的行列！')
         return redirect(url_for('home'))
 
     flash('登入失敗了...')
     return render_template('login-a.html')
+
 
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
     return redirect(url_for('login'))
 
+
 @app.route("/")
 def homepage():
     return redirect(url_for('login'))
+
 
 @app.route("/home")
 def home():
     return render_template("home.html")
 
+
 @app.route("/profile")
 def profile():
     return render_template("./profile.html")
+
 
 @app.route("/more")
 def more():
     return render_template("more_profile.html")
 
+
 @app.route("/download")
 def download():
     return render_template("download.html")
+
 
 @app.route("/download_to", methods=['POST'])
 def download_to():
     if request.values['password name'] == '1234':
         html_name = request.values['firstname']
-        save_name = request.values['lastname'] +'.pdf'
-        pdfkit.from_url(html_name,save_name)
+        save_name = request.values['lastname'] + '.pdf'
+        pdfkit.from_url(html_name, save_name)
         return render_template("home.html")
     else:
         return render_template("download.html")
 
+
+@app.route("/send")
+def send():
+    return render_template("send.html")
+
+
+@app.route("/send_paper", methods=['POST'])
+def send_paper():
+    if request.values['password name'] == '1234':
+        a1 = request.values['userfor']
+        a2 = request.values['time_y']
+        a3 = request.values['time_m']
+        a4 = request.values['time_d']
+        a5 = request.values['letter_1']
+        sendpaper(a1, a2, a3, a4, a5)
+        return render_template("alert.html")
+
+    else:
+        return render_template("download.html")
+
+
+@app.route("/ClockIn")
+def ClockIn():
+    return render_template("ClockIn.html")
+
+
+@app.route("/finance")
+def finance():
+    return render_template("finance.html")
+
+
+@app.route("/Leave")
+def Leave():
+    return render_template("Leave.html")
+
+
+@app.route("/overtime")
+def overtime():
+    return render_template("overtime.html")
 
 
 if __name__ == "__main__":
