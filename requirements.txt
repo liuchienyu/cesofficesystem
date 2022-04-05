@@ -3,5 +3,5 @@ flask_login
 datetime
 django
 pdfkit
-email.message
+email
 pathlib
