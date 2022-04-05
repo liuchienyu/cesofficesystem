@@ -3,4 +3,3 @@ flask_login
 datetime
 django
 pdfkit
-email
