@@ -16,7 +16,20 @@
 
                             <!-- Time -->
                             <div class="card shadow mb-5 text-gray-800">
-                                <span class="h1" id="Time">22:02:30</span>
+                                <span class="h1" id="Time"> <span class="h1" id="Time"><script language="JavaScript">
+                                    function ShowTime() {
+                                        var NowDate = new Date();
+                                        var h = NowDate.getHours();
+                                        var m = NowDate.getMinutes();
+                                        var s = NowDate.getSeconds();
+                                        document.getElementById('showbox').innerHTML = h + '：' + m + '：' + s;
+                                        setTimeout('ShowTime()', 1000);
+                                    }
+                                </script>
+                                
+                                <body onload="ShowTime()">
+                                    <div id="showbox"></div>
+                                </body></span>
                             </div>
 
                         </div>
