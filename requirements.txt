@@ -4,4 +4,3 @@ datetime
 django
 pdfkit
 email
-pathlib
