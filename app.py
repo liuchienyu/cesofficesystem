@@ -118,15 +118,20 @@ def send_paper():
         a4 = request.values['time_d']
         a5 = request.values['letter_1']
         sendpaper(a1, a2, a3, a4, a5)
-        return render_template("alert.html")
+        send_alert = '發送完成' 
+        return render_template("alert_paper.html")
 
     else:
-        return render_template("download.html")
+        return render_template("send.html")
 
 
 @app.route("/ClockIn")
 def ClockIn():
     return render_template("ClockIn.html")
+
+@app.route("/go_to_work")
+def go_to_work():
+    return render_template("alert_gtw.html")
 
 
 @app.route("/finance")
