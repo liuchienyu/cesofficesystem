@@ -2,23 +2,29 @@ from flask import Flask, Blueprint, flash, render_template, redirect, url_for, r
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from datetime import timedelta
 from django.contrib.auth.decorators import login_required
-import pdfkit
+import pdfkit, os
 from test_email import sendpaper
 from functools import wraps
+from werkzeug.utils import secure_filename
 
 class User:
-    def __init__(self, id, username, password):
+    def __init__(self, id, username, password, pagename,number):
         self.id = id
         self.username = username
         self.password = password
+        self.pagename = pagename
+        self.number = number
+
 
     def __repr__(self):
         return f'<User: {self.username}>'
 
 users = []
-users.append(User(id=1, username='Anthony', password='1234'))
-users.append(User(id=2, username='Becca', password='secret'))
-users.append(User(id=3, username='Carlos', password='somethingsimple'))
+users.append(User(id=1, username='IU_lee', password='1234',pagename='李知恩',number='A003'))
+users.append(User(id=2, username='dandy40605@gmail.com', password='1234',pagename='劉建佑',number='A001'))
+users.append(User(id=3, username='flyr1207@gmail.com', password='1234',pagename='侯正成',number='A002'))
+
+
 
 app = Flask(__name__)
 #login_manager = LoginManager()
@@ -27,7 +33,11 @@ app = Flask(__name__)
 #login_manager.login_view = 'login'
 #login_manager.login_message = '請證明你並非來自黑暗草泥馬界'
 app.secret_key = "#230dec61-fee8-4ef2-a791-36f9e680c9fc"
-#app.permanent_session_lifetime = timedelta(minutes=5)
+app.permanent_session_lifetime = timedelta(minutes=5)
+UPLOAD_FOLDER = './static/images'
+ALLOWED_EXTENSIONS = set(['pdf', 'png', 'jpg', 'jpeg', 'gif'])
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB
 
 
 
@@ -215,6 +225,38 @@ def Leave():
 @login_required
 def overtime():
     return render_template("overtime.html")
+
+@app.route("/profile_setting")
+@login_required
+def profile_setting():
+    return render_template("profile_setting.html")
+
+
+
+
+
+
+
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+        
+@app.route('/upload', methods=['GET', 'POST'])
+@login_required
+def upload():
+    if request.method == 'POST':
+        file = request.files['file']
+        filerename = request.form['filefor']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            os.chdir(UPLOAD_FOLDER)
+            os.rename(filename,  filerename)
+            return render_template("uploaded_file.html")
+    return render_template("uploaded_file.html")  
+
 
 
 if __name__ == "__main__":

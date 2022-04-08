@@ -1,5 +1,20 @@
 {% extends "base.html" %}
 {% block body %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+<!-- Page Heading -->
+<h1 class="mb-5 text-gray-800">公文系統</h1>
+<tr class="h6">
+  <th scope="row" class="align-middle">一級(院長)</th>
+  <td class="align-middle">
+      <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" aria-label=".form-select-lg example">
+          <option selected>執行室</option>
+          <option value="1">行政部</option>
+          <option value="2">人事部</option>
+          <option value="3">資訊部</option>
+          <option value="4">財務部</option>
+      </select>
 <div class="row">
   <div class="col">
     <form method="POST" action="{{url_for('send_paper')}}">

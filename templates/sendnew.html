@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block body %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+<!-- Page Heading -->
+<h1 class="mb-5 text-gray-800">公文系統</h1>
+<!-- First row -->
+<div class="col-12 col-md-3 text-left text-md-right">
+        <span class="h4 text-gray-800 w-100">請假天數&時數：</span>
+    </div>
+        <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" aria-label=".form-select-lg example">
+            <option selected>總管理處</option>
+            <option value="1">秘書室</option>
+            <option value="2">財務部</option>
+            <option value="3">資訊部</option>
+            <option value="4">人資部</option>
+        </select>
+<!-- First row -->
+<div class="row mb-3 text-center">
+
+    <div class="col-12 col-md-3 text-left text-md-right">
+        <span class="h4 text-gray-800 w-100">請假天數&時數：</span>
+    </div>
+
+    <div class="col-12 col-md-8">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="請輸入時數" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+    </div>
+
+</div>
+{% endblock %}
