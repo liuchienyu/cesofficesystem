@@ -3,5 +3,4 @@ flask_login
 datetime
 django
 pdfkit
-functools
 werkzeug.utils
