@@ -15,7 +15,7 @@ from main import User
 
 app = Flask(__name__)
 app.secret_key = "#230dec61-fee8-4ef2-a791-36f9e680c9fc"
-app.permanent_session_lifetime = timedelta(minutes=5)
+app.permanent_session_lifetime = timedelta(minutes=30)
 UPLOAD_FOLDER = './static/images'
 ALLOWED_EXTENSIONS = set(['pdf', 'png', 'jpg', 'jpeg', 'gif'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
