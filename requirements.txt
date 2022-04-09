@@ -4,3 +4,6 @@ datetime
 django
 pdfkit
 werkzeug
+flask_sqlalchemy
+sqlalchemy
+sqlalchemy.orm

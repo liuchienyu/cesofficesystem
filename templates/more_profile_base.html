@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>更多個人資訊</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="static/css/more-profile.css">
+</head>
+
+<body>
+    <div class="profile-card">
+        <div class="card-header">
+            <div class="goback">
+                <a class="dropdown-item" href="/profile" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> 
+                </a>
+            </div>   
+            <div class="pic">
+                <img src="static/images/{{g.user.username}}.png" alt="">
+            </div>
+            <div class="name">{{g.user.id_name}}</div>
+            <div class="desc">測試員</div>
+            <div class="sm">
+            </div>
+        <div class="card-footer">
+            <div class="numbers">
+                <div class="item">
+                    <span>{{g.user.username}}</span>
+                    成員編號
+                </div>
+                <div class="border"></div>
+                <div class="item">
+                    <span>總管理處</span>
+                    所屬部門
+                </div>
+                <div class="border"></div>
+                <div class="item">
+                    <span>120K</span>
+                    累計服務時數
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="numbers">
+                    <div class="item">
+                        <span>{{g.user.id_name}}</span>
+                        姓名
+                    </div>
+                    <div class="border"></div>
+                    <div class="item">
+                        <span>{{g.user.id_sex}}</span>
+                       性別
+                    </div>
+                    <div class="border"></div>
+                    <div class="item">
+                        <span>{{g.user.id_birth}}</span>
+                    生日
+                    </div>
+                </div>
+            </div>
+                <div class="numbers">
+                    <div class="item-s">
+                        <span>{{g.user.id_email}}</span>
+                        電子郵件
+                    </div>
+                    <div class="border"></div>
+                    <div class="item">
+                        <span>{{g.user.id_phone}}</span>
+                       聯絡電話
+                    </div>
+                </div>
+            <div class="card-footer">
+                <div class="numbers">
+                    <div class="item">
+                        <span>2</span>
+                        層級代號
+                    </div>
+                    <div class="border"></div>
+                    <div class="item">
+                        <span>測試員</span>
+                       職稱
+                    </div>
+                    <div class="border"></div>
+                    <div class="item">
+                        <span>4</span>
+                    職等
+                    </div>
+                </div>
+            </div>
+    </div>
+{% block body %}
+{% endblock %}
+</body>
+
+</html>

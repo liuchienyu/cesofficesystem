@@ -1,0 +1,304 @@
+{% extends "base.html" %}
+{% block body %}
+<body onload="showDate();showYear();">
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="row">
+                        <div class="col-12 col-md-12 text-left">
+                            <span class="h1 text-gray-800">文號申請系統</span>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4 mb-4">
+                        <div class="col-6 col-md-3 text-right">
+                            <span class="h4 text-gray-800 w-100">申請日期：</span>
+                        </div>
+                        
+                        <div class="col-6 col-md-2 text-left">
+                            <input type="text" class="text-center" name="applyDate" id="applyDate" disabled>
+                            
+                            <script>
+                                function showDate(){
+                                    var NowDate = new Date();
+                                    var yy = NowDate.getFullYear();
+                                    var mm = NowDate.getMonth() + 1;
+                                    var dd = NowDate.getDate();
+                                    document.getElementById('applyDate').value = yy + "/" + mm + "/" + dd;
+                                }
+                            </script>
+                        </div>
+
+                        <div class="col-6 col-md-3 text-right">
+                            <span class="h4 text-gray-800 w-100">申請人/承辦人：</span>
+                        </div>
+                        
+                        <div class="col-6 col-md-2 text-left">
+                            <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" name="applicant" id="applicant" aria-label=".form-select-lg example">
+                                <option selected>請選擇</option>
+                                <option value="1">劉建佑</option>
+                                <option value="2">侯正成</option>
+                                <option value="3">陳星維</option>
+                                <option value="4">劉軒志</option>
+                                <option value="5">林彥合</option>
+                                <option value="6">李知恩</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-6 col-md-3 text-right">
+                            <span class="h4 text-gray-800 w-100">連絡電話：</span>
+                        </div>
+                        
+                        <div class="col-6 col-md-2 text-left">
+                            <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" name="phoneNumber" id="phoneNumber" aria-label=".form-select-lg example">
+                                <option selected>請選擇</option>
+                                <option value="1">0966473569</option>
+                                <option value="2">0966473567</option>
+                                <option value="3">0966473561</option>
+                                <option value="4">0966473562</option>
+                                <option value="5">0966473563</option>
+                                <option value="6">0966473564</option>
+                            </select>
+                        </div>
+
+                        <div class="col-6 col-md-3 text-right">
+                            <span class="h4 text-gray-800 w-100">聯絡郵件：</span>
+                        </div>
+
+                        <div class="col-6 col-md-2 text-left">
+                            <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" name="mail" id="mail" aria-label=".form-select-lg example">
+                                <option selected>請選擇</option>
+                                <option value="1">dandy40605@gmail.com</option>
+                                <option value="2">dandy40606@gmail.com</option>
+                                <option value="3">dandy40607@gmail.com</option>
+                                <option value="4">dandy40608@gmail.com</option>
+                                <option value="5">dandy40609@gmail.com</option>
+                                <option value="6">iu19930516@gmail.com</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-6 col-md-3 text-right">
+                            <span class="h4 text-gray-800 w-100">受文者：</span>
+                        </div>
+
+                        <div class="col-6 col-md-2 text-left">
+                            <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" name="recipient" id="recipient" aria-label=".form-select-lg example">
+                                <option selected>請選擇</option>
+                                <option value="1">劉建佑</option>
+                                <option value="2">侯正成</option>
+                                <option value="3">陳星維</option>
+                                <option value="4">劉軒志</option>
+                                <option value="5">林彥合</option>
+                                <option value="6">李知恩</option>
+                            </select>
+                        </div>
+
+                        <div class="col-6 col-md-3 text-right">
+                            <span class="h4 text-gray-800 w-100">單位別：</span>
+                        </div>
+    
+                        <div class="col-6 col-md-2 text-left">
+                            <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" name="department" id="department" aria-label=".form-select-lg example">
+                                <option selected>請選擇</option>
+                                <option value="1">A000</option>
+                                <option value="2">AA00</option>
+                                <option value="3">AB00</option>
+                                <option value="4">AC00</option>
+                                <option value="5">ACA0</option>
+                                <option value="6">ACB0</option>
+                                <option value="7">AD00</option>
+                                <option value="8">AD0A</option>
+                                <option value="9">AE00</option>
+                                <option value="10">AEA0</option>
+                                <option value="11">AEB0</option>
+                                <option value="12">AEAA</option>
+                                <option value="13">AEBA</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-6 col-md-3 text-right">
+                            <span class="h4 text-gray-800 w-100">類別：</span>
+                        </div>
+    
+                        <div class="col-6 col-md-2 text-left">
+                            <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" name="category" id="category" aria-label=".form-select-lg example">
+                                <option selected>請選擇</option>
+                                <option value="1">A</option>
+                                <option value="2">B</option>
+                                <option value="3">C</option>
+                                <option value="4">D</option>
+                                <option value="5">E</option>
+                                <option value="6">F</option>
+                                <option value="7">G</option>
+                                <option value="8">H</option>
+                                <option value="9">I</option>
+                                <option value="10">J</option>
+                                <option value="11">K</option>
+                                <option value="12">L</option>
+                                <option value="13">M</option>
+                                <option value="14">N</option>
+                                <option value="15">O</option>
+                                <option value="16">P</option>
+                                <option value="17">Z</option>
+                            </select>
+                        </div>
+
+                        <div class="col-6 col-md-3 text-right">
+                            <span class="h4 text-gray-800 w-100">年份：</span>
+                        </div>
+    
+                        <div class="col-6 col-md-2 text-left">
+                            <input type="text" class="text-center" name="year" id="year" disabled>
+                            
+                            <script>
+                                function showYear(){
+                                    var NowDate = new Date();
+                                    var yy = parseInt(NowDate.getFullYear());
+                                    yy = yy % 100;
+                                    document.getElementById('year').value = yy;
+                                }
+                            </script>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-6 col-md-3 text-right">
+                            <span class="h4 text-gray-800 w-100">字別：</span>
+                        </div>
+    
+                        <div class="col-6 col-md-2 text-left">
+                            <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" name="font" id="font" aria-label=".form-select-lg example">
+                                <option selected>請選擇</option>
+                                <option value="1">執行字</option>
+                                <option value="2">監察字</option>
+                                <option value="3">秘書字</option>
+                                <option value="4">財務字</option>
+                                <option value="5">財會字</option>
+                                <option value="6">財出字</option>
+                                <option value="7">人資字</option>
+                                <option value="8">人實字</option>
+                                <option value="9">資訊字</option>
+                                <option value="10">資研字</option>
+                                <option value="11">資技字</option>
+                                <option value="12">資研一字</option>
+                                <option value="13">資技一字</option>
+                            </select>
+                        </div>
+
+                        <div class="col-6 col-md-3 text-right">
+                            <span class="h4 text-gray-800 w-100">流水編號：</span>
+                        </div>
+    
+                        <div class="col-6 col-md-2 text-left">
+                            <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" name="serialNumber" id="serialNumber" aria-label=".form-select-lg example">
+                                <option selected>休假</option>
+                                <option value="1">病假</option>
+                                <option value="2">事假</option>
+                                <option value="3">公假</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-4 col-md-3 text-right">
+                            <span class="h4 text-gray-800 w-100">速別：</span>
+                        </div>
+    
+                        <div class="col-4 col-md-2 text-left">
+                            <select onchange="special();" class="form-select form-select-lg btn btn-outline-info w-100 text-center" name="speed" id="speed" aria-label=".form-select-lg example">
+                                <option selected>請選擇</option>
+                                <option value="1">最速件</option>
+                                <option value="2">速件</option>
+                                <option value="3">普通件</option>
+                                <option value="4">特殊件</option>
+                            </select>
+                        </div>
+
+                        <div class="col-4 col-md-2">
+                            <input type="hidden" size="15" id="special" placeholder="請輸入時限">
+                        </div>
+
+                        <script>
+                            function special(){
+                                var a = document.getElementById("speed").value;
+                                if(a == 4){
+                                    document.getElementById('special').type = 'text';
+                                }
+                                else{
+                                    document.getElementById('special').type = 'hidden';
+                                }
+                            }
+                        </script>
+                    </div> 
+                        
+                    <div class="row mb-4">
+                        <div class="col-6 col-md-3 text-right">
+                            <span class="h4 text-gray-800 w-100">密等：</span>
+                        </div>
+    
+                        <div class="col-6 col-md-2 text-left">
+                            <select onchange="secret();" class="form-select form-select-lg btn btn-outline-info w-100 text-center" name="secretLevel" id="secretLevel" aria-label=".form-select-lg example">
+                                <option selected>請選擇</option>
+                                <option value="1">絕對機密</option>
+                                <option value="2">極機密</option>
+                                <option value="3">機密</option>
+                                <option value="4">密</option>
+                                <option value="5">非機密</option>
+                            </select>
+                        </div>
+
+                        <div class="col-4 col-md-4">
+                            <input type="hidden" size="25" id="secret" placeholder="請輸入解密條件或保密期限">
+                        </div>
+
+                        <script>
+                            function secret(){
+                                var b = document.getElementById("secretLevel").value;
+                                if(b == 5){
+                                    document.getElementById('secret').type = 'hidden';
+                                }
+                                else{
+                                    document.getElementById('secret').type = 'text';
+                                }
+                            }
+                        </script>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6 col-md-3 text-right">
+                            <span class="h4 text-gray-800 w-100">附件（是否）：</span>
+                        </div>
+    
+                        <div class="col-6 col-md-2 text-left">
+                            <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" name="appendix" id="appendix" aria-label=".form-select-lg example">
+                                <option selected>是</option>
+                                <option value="1">否</option>
+                            </select>
+                        </div>    
+                    </div>
+                    
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+{% endblock %}

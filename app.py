@@ -2,36 +2,18 @@ from flask import Flask, Blueprint, flash, render_template, redirect, url_for, r
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from datetime import timedelta
 from django.contrib.auth.decorators import login_required
+from flask_sqlalchemy import SQLAlchemy
 import pdfkit, os
 from test_email import sendpaper
 from functools import wraps
 from werkzeug.utils import secure_filename
-
-class User:
-    def __init__(self, id, username, password, pagename,number):
-        self.id = id
-        self.username = username
-        self.password = password
-        self.pagename = pagename
-        self.number = number
-
-
-    def __repr__(self):
-        return f'<User: {self.username}>'
-
-users = []
-users.append(User(id=1, username='IU_lee', password='1234',pagename='李知恩',number='A003'))
-users.append(User(id=2, username='dandy40605@gmail.com', password='1234',pagename='劉建佑',number='A001'))
-users.append(User(id=3, username='flyr1207@gmail.com', password='1234',pagename='侯正成',number='A002'))
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from main import User
 
 
 
 app = Flask(__name__)
-#login_manager = LoginManager()
-#login_manager.init_app(app)
-#login_manager.session_protection = "strong"
-#login_manager.login_view = 'login'
-#login_manager.login_message = '請證明你並非來自黑暗草泥馬界'
 app.secret_key = "#230dec61-fee8-4ef2-a791-36f9e680c9fc"
 app.permanent_session_lifetime = timedelta(minutes=5)
 UPLOAD_FOLDER = './static/images'
@@ -39,42 +21,16 @@ ALLOWED_EXTENSIONS = set(['pdf', 'png', 'jpg', 'jpeg', 'gif'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB
 
+db = SQLAlchemy()
+#datebase
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+BASE_DIR=os.path.dirname(os.path.realpath(__file__))
+connection_string = "sqlite:///"+os.path.join(BASE_DIR,'site.db')
+engine=create_engine(connection_string,echo=True,connect_args={"check_same_thread": False})
+Session = sessionmaker(bind=engine)
+db_session = Session()
 
-
-
-"""""
-class User(UserMixin):
-    pass
-
-
-@login_manager.user_loader
-def user_loader(使用者):
-    if 使用者 not in users:
-        return
-
-   user = User()
-   user.id = 使用者
-   return user
-
-
-@login_manager.request_loader
-def request_loader(request):
-    使用者 = request.form.get('user_id')
-    if 使用者 not in users:
-        return
-
-    user = User()
-    user.id = 使用者
-
-    user.is_authenticated = request.form['password'] == users[使用者]['password']
-
-    return user
-
-
-
-users = {'Me': {'password': 'myself'}}
-"""
-
+users=db_session.query(User.username,User.id_name,User.id_sex,User.id_birth,User.id_phone,User.id_email,User.username,User.password).all()
 
 
 @app.before_request
@@ -82,7 +38,7 @@ def before_request():
     g.user = None
 
     if 'user_id' in session:
-        user = [x for x in users if x.id == session['user_id']][0]
+        user = [x for x in users if x[0] == session['user_id']][0]
         g.user = user
 
 def login_required(a):
@@ -95,34 +51,18 @@ def login_required(a):
             
     return wrap
 
-"""""
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'GET':
-        return render_template("login-a.html")
-
-    使用者 = request.form['user_id']
-    if (使用者 in users) and (request.form['password'] == users[使用者]['password']):
-        user = User()
-        user.id = 使用者
-        login_user(user)
-        return redirect(url_for('home'))
-
-    flash('登入失敗了...')
-    return render_template('login-a.html')
-"""
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         session.pop('user_id', None)
 
-        username = request.form['username']
-        password = request.form['password']
+        username_r = request.form['username']
+        password_r = request.form['password']
         
-        user = [x for x in users if x.username == username][0]
-        if user and user.password == password:
-            session['user_id'] = user.id
+        user1 = db_session.query(User.username).filter(User.username == username_r).first()
+        user2 = db_session.query(User.password).filter(User.password == password_r ).first()
+        if  user1 != None and user2 != None :
+            session['user_id'] = username_r
             return redirect(url_for('home'))
 
         return redirect(url_for('login'))
@@ -178,7 +118,7 @@ def download_to():
 @app.route("/send")
 @login_required
 def send():
-    return render_template("sendnew.html")
+    return render_template("send.html")
 
 
 @app.route("/send_paper", methods=['POST'])
@@ -226,11 +166,25 @@ def Leave():
 def overtime():
     return render_template("overtime.html")
 
-@app.route("/profile_setting")
+@app.route("/profile_setting",methods=['GET', 'POST'])
 @login_required
 def profile_setting():
-    return render_template("profile_setting.html")
+    return render_template("profile_setting_base.html")
 
+@app.route("/profile_updata", methods=['GET', 'POST'])
+@login_required
+def profile_updata():
+    if request.method == 'POST':
+        newin = request.form['new_id_name']
+        res = db_session.query(User).filter_by(id_name=g.user.id_name).update({'id_name':newin})
+        db_session.commit()
+        db_session.close()
+        return redirect(url_for('more'))
+
+@app.route("/paper_number")
+@login_required
+def paper_number():
+    return render_template("paper_number.html")
 
 
 
