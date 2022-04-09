@@ -11,6 +11,7 @@
 
 <body>
     <div class="profile-card">
+        <form action="/profile_updata" method="POST">
         <div class="card-header">
             <div class="goback">
                 <a class="dropdown-item" href="/profile" data-toggle="modal" data-target="#logoutModal">
@@ -18,16 +19,16 @@
                 </a>
             </div>   
             <div class="pic">
-                <img src="http://127.0.0.1:5000/static/images/d5809428.png" alt="">
+                <img src="static/images/{{g.user.username}}.png" alt="">
             </div>
-            <div class="name">李知恩</div>
+            <div class="name">{{g.user.id_name}}</div>
             <div class="desc">測試員</div>
             <div class="sm">
             </div>
         <div class="card-footer">
             <div class="numbers">
                 <div class="item">
-                    <span>A001</span>
+                    <span>{{g.user.username}}</span>
                     成員編號
                 </div>
                 <div class="border"></div>
@@ -44,29 +45,41 @@
             <div class="card-footer">
                 <div class="numbers">
                     <div class="item">
-                        <span>李知恩</span>
+                        <div class="col-12 col-md-8">
+                            <div class="col-12 mt-3">
+                                <input type="text" class="form-control" name="new_id_name" placeholder={{g.user.id_name}}>
+                              </div>
+                        </div>
                         姓名
                     </div>
                     <div class="border"></div>
                     <div class="item">
-                        <span>女</span>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder={{g.user.id_sex}} aria-label="new_id_sex" aria-describedby="basic-addon1">
+                        </div>
                        性別
                     </div>
                     <div class="border"></div>
                     <div class="item">
-                        <span>1993年5月16日</span>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder={{g.user.id_birth}} aria-label="new_id_birth" aria-describedby="basic-addon1">
+                        </div>
                     生日
                     </div>
                 </div>
             </div>
                 <div class="numbers">
                     <div class="item-s">
-                        <span>iu19930516@gmail.com</span>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder={{g.user.id_email}} aria-label="new_id_email" aria-describedby="basic-addon1">
+                        </div>
                         電子郵件
                     </div>
                     <div class="border"></div>
                     <div class="item">
-                        <span>0919-930-516</span>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder={{g.user.id_phone}} aria-label="new_id_phone" aria-describedby="basic-addon1">
+                        </div>
                        聯絡電話
                     </div>
                 </div>
@@ -88,6 +101,9 @@
                     </div>
                 </div>
             </div>
+                <button type="#" class="btn btn-primary">發送
+                </button>
+            </form>
     </div>
 {% block body %}
 {% endblock %}
