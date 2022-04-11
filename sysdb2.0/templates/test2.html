@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MySQL</title>
+    <style>
+        div {
+            width: 250px;
+            height: 100px;
+            margin: auto;
+            margin-top: 200px;
+            font-size: 15px;
+            font-weight: 700;
+            background: #ffffff;
+        }
+        
+        div form input {
+            margin-top: 10px;
+        }
+        
+        .btn {
+            margin-left: 100px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <form action="http://127.0.0.1:5000/research" method="POST">
+            <label>輸入查詢標籤: </label>
+            <input type="text" name="researh_id"><br>
+            <label>輸入查詢內容: </label>
+            <input type="text" name="researh_in"><br>
+            <input class="btn" type="submit" name="submit" value="送出"><br>
+        </form>
+    </div>
+</body>
+
+</html>
