@@ -10,7 +10,9 @@ from werkzeug.utils import secure_filename
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from main import User
-
+import pymongo
+from pymongo import MongoClient
+################################
 
 
 app = Flask(__name__)
@@ -22,7 +24,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB
 
 db = SQLAlchemy()
-#datebase
+#datebase1
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 BASE_DIR=os.path.dirname(os.path.realpath(__file__))
 connection_string = "sqlite:///"+os.path.join(BASE_DIR,'site.db')
@@ -31,6 +33,12 @@ Session = sessionmaker(bind=engine)
 db_session = Session()
 
 users=db_session.query(User.username,User.id_name,User.id_sex,User.id_birth,User.id_phone,User.id_email,User.username,User.password).all()
+
+
+#datebase2
+CONNECTION_STRING ="mongodb+srv://dandy40605:1234@cluster0.qqbqe.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+client = MongoClient(CONNECTION_STRING,tls=True, tlsAllowInvalidCertificates=True,tz_aware=True )#tls=True, tlsAllowInvalidCertificates=True為解決無法連線問題
+
 
 
 @app.before_request
@@ -186,11 +194,15 @@ def profile_updata():
 def paper_number():
     return render_template("paper_number.html")
 
-
-
-
-
-
+@app.route("/papernumber_show")
+@login_required
+def papernumber_show():
+    db = client.systemdata
+    base_info = db.document_code_data
+    code_results = base_info.find({'category':'文號申請'})
+    code_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
+    code_results.limit(10)#限制數量
+    return render_template("papernumber_show.html",code_results=code_results)
 
 
 def allowed_file(filename):
@@ -211,7 +223,10 @@ def upload():
             return render_template("uploaded_file.html")
     return render_template("uploaded_file.html")  
 
-
+@app.route("/testpage")
+@login_required
+def tastpage():
+    return render_template("tastpage.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

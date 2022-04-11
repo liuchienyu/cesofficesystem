@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block body %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+<!-- Page Heading -->
+<h1 class="mb-5 text-gray-800">公文系統</h1>
+<tr class="h6">
+<div class="row">
+  <div class="col">
+    <form method="POST" action="{{url_for('send_paper')}}">
+      <div class="form-row">
+        <div class="col-12 mt-3">
+        <input type="text" class="form-control" name="userfor" placeholder="請輸入受文者">
+        </div>
+      <div class="col-12 mt-3">
+        <input type="text" class="form-control" name="time_y" placeholder="請輸入發文日期(年)">
+      </div>
+      <div class="col-12 mt-3">
+        <input type="text" class="form-control" name="time_m" placeholder="請輸入發文日期(月)">
+      </div>
+      <div class="col-12 mt-3">
+        <input type="text" class="form-control" name="time_d" placeholder="請輸入發文日期(日)">
+      </div>
+      <div class="col-12 mt-3">
+        <input type="text" class="form-control" name="letter_1" placeholder="請輸入內文">
+      </div>
+      <div class="col-12 mt-3">
+        <input type="text" class="form-control" name="password name" placeholder="password name">
+      </div>
+      <div class="col-12 mt-3 pt-3">
+        <button type="#" class="btn btn-primary">發送公文
+        </button>
+      </div>
+      </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+{% endblock %}
