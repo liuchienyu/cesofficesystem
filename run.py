@@ -63,7 +63,7 @@ app.register_blueprint(users)
 app.register_blueprint(check_in)
 #app.register_blueprint(file_name)
 app.register_blueprint(financesys)
-app.register_blueprint(papernumber)
+#app.register_blueprint(papernumber)
 
 if __name__ == '__main__':
     app.run(debug=True)
