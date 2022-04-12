@@ -7,3 +7,5 @@ werkzeug
 flask_sqlalchemy
 sqlalchemy
 sqlalchemy.orm
+pymongo
+requests
