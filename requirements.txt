@@ -7,5 +7,5 @@ werkzeug
 flask_sqlalchemy
 sqlalchemy
 sqlalchemy.orm
-pymongo
-requests
+pymongo[srv]==3.12.0
+python-dotenv
