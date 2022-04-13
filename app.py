@@ -93,7 +93,10 @@ def homepage():
 @app.route("/home")
 @login_required
 def home():
-    return render_template("home.html")
+    db = client.systemdata
+    base_info = db.document_code_data
+    count_results = base_info.count_documents({'category':'文號申請'})
+    return render_template("home.html", count_results= count_results)
 
 
 @app.route("/profile")
