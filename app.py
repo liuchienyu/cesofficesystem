@@ -1,3 +1,4 @@
+from locale import ABDAY_6
 from flask import Flask, Blueprint, flash, render_template, redirect, url_for, render_template, request, session, g
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from datetime import timedelta
@@ -5,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from flask_sqlalchemy import SQLAlchemy
 import pdfkit, os
 from test_email import sendpaper
+from test_data import document_code_data_in
 from functools import wraps
 from werkzeug.utils import secure_filename
 from sqlalchemy import create_engine
@@ -198,6 +200,21 @@ def profile_updata():
 @login_required
 def paper_number():
     return render_template("paper_number.html")
+
+
+@app.route("/send_paper_number", methods=['POST'])
+@login_required
+def send_paper_number():
+    if request.method == 'POST':
+        a1 = request.values['font']
+        a2 = request.values['font']+'第'+request.values['department']+request.values['category']
+        a3 = request.values['speed']#+request.values['special']
+        a4 = request.values['secretLevel']#+request.values['secret']
+        a5 = request.values['appendix']
+        a6 = request.values['applicant']
+        a7 = request.values['recipient']
+        document_code_data_in(a1, a2, a3, a4, a5,a6,a7)
+        return render_template("alert_papernumber.html")
 
 @app.route("/papernumber_show")
 @login_required
