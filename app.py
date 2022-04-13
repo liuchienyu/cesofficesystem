@@ -100,6 +100,11 @@ def home():
     count_results = base_info.count_documents({'category':'文號申請'})
     return render_template("home.html", count_results= count_results)
 
+@app.route("/activity_record")
+@login_required
+def activity_record():
+    return render_template("activity_record.html")
+
 
 @app.route("/profile")
 @login_required
