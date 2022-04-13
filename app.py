@@ -146,8 +146,9 @@ def send_paper():
         a4 = request.values['time_d']
         a5 = request.values['letter_1']
         sendpaper(a1, a2, a3, a4, a5)
-        send_alert = '發送完成' 
-        return render_template("alert_paper.html")
+        alert_base = '公文送出完成'
+        alert_base_herf = 'send_paper'
+        return render_template("alert_base.html",alert_base=alert_base,alert_base_herf = alert_base_herf)
 
     else:
         return render_template("send.html")
@@ -214,7 +215,9 @@ def send_paper_number():
         a6 = request.values['applicant']
         a7 = request.values['recipient']
         document_code_data_in(a1, a2, a3, a4, a5,a6,a7)
-        return render_template("alert_papernumber.html")
+        alert_base = '申請送出完成'
+        alert_base_herf = 'paper_number_show'
+        return render_template("alert_base.html",alert_base=alert_base,alert_base_herf = alert_base_herf)
 
 @app.route("/papernumber_show")
 @login_required
@@ -249,6 +252,27 @@ def upload():
 @login_required
 def tastpage():
     return render_template("tastpage.html")
+
+
+@app.route("/secretary_room_page")
+@login_required
+def secretary_room_page():
+    return render_template("secretary_room_page.html")
+
+@app.route("/finance_department_page")
+@login_required
+def finance_department_page():
+    return render_template("finance_department_page.html")
+
+@app.route("/information_department_page")
+@login_required
+def information_department_page():
+    return render_template("information_department_page.html")
+
+@app.route("/HR_department")
+@login_required
+def HR_department():
+    return render_template("HR_department.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
