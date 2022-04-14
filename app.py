@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from flask_sqlalchemy import SQLAlchemy
 import pdfkit, os
 from test_email import sendpaper
-from test_data import document_code_data_in
+from test_data import document_code_data_find, document_code_data_in
 from functools import wraps
 from werkzeug.utils import secure_filename
 from sqlalchemy import create_engine
@@ -98,7 +98,10 @@ def home():
     db = client.systemdata
     base_info = db.document_code_data
     count_results = base_info.count_documents({'category':'文號申請'})
-    return render_template("home.html", count_results= count_results)
+    code_results = base_info.find({'category':'文號申請'})
+    code_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
+    code_results.limit(5)#限制數量
+    return render_template("home.html", count_results= count_results,code_results = code_results)
 
 @app.route("/activity_record")
 @login_required
@@ -279,5 +282,11 @@ def information_department_page():
 def HR_department():
     return render_template("HR_department.html")
 
+
+@app.route("/general_management_office")
+@login_required
+def general_management_office():
+    return render_template("general_management_office.html")
+    
 if __name__ == "__main__":
     app.run(debug=True)
