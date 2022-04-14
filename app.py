@@ -1,4 +1,3 @@
-from locale import ABDAY_6
 from flask import Flask, Blueprint, flash, render_template, redirect, url_for, render_template, request, session, g
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from datetime import timedelta
