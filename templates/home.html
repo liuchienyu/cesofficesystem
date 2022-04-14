@@ -169,13 +169,51 @@
             </div>
         </div>
     </div>
-</div>
 
-<!-- Content Row -->
-<div class="row">
+    <!-- Area Chart -->
+    <div class="col-xl-8 col-lg-7 ">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between ">
+                <h6 class="m-0 font-weight-bold text-primary ">團隊最新公告</h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area">
+                    <div class=" mx-auto table-responsive-sm row text-center ">
+                        <table class="table table-hover text-nowrap ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">發布日期</th>
+                                    <th scope="col">發布單位</th>
+                                    <th scope="col">主旨</th>
+                                    <th scope="col">摘要</th>
+                                    <th scope="col">發布人</th>
+                                </tr>
+                            </thead>
+                            <li class='list-unstyled justify-content-between d-flex h6'>
+                            {%for i in code_results%}
+                                <tbody id="myTable">
+                                    <tr>
+                                    <td class="text-primary">{{i['code_date']}}</td>
+                                    <td>{{i['who_make']}}</td>
+                                    <td>{{i['code_number']}}</td>
+                                    <td>{{i['code_speed']}}</td>
+                                    <td>{{i['class_level']}}</td>
+                                    <td>{{i['appendix']}}</td>
+                                    </tr>
+                                </tbody>
+                            {%endfor%}
+                            </li>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Content Column -->
-    <div class="col-lg-6 mb-4">
+    <div class="col-xl-4 col-lg-5">
 
         <!-- Project Card Example -->
         <div class="card shadow mb-4">
@@ -203,6 +241,17 @@
                 <div class="progress">
                     <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
+                <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-primary"></i> 
+                    </span>
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-success"></i> 
+                    </span>
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-info"></i> 
+                    </span>
+                </div>
             </div>
         </div>
 
@@ -220,17 +269,78 @@
                 <h6 class="m-0 font-weight-bold text-primary">財務消息</h6>
             </div>
             <div class="card-body">
-                <div class="text-center">
+                <div class="card-body">
+                    <div class="chart-area">
+                        <div class=" mx-auto table-responsive-sm row text-center ">
+                            <table class="table table-hover text-nowrap ">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">發布日期</th>
+                                        <th scope="col">發布單位</th>
+                                        <th scope="col">主旨</th>
+                                        <th scope="col">摘要</th>
+                                        <th scope="col">發布人</th>
+                                    </tr>
+                                </thead>
+                                <li class='list-unstyled justify-content-between d-flex h6'>
+                                {%for i in code_results%}
+                                    <tbody id="myTable">
+                                        <tr>
+                                        <td class="text-primary">{{i['code_date']}}</td>
+                                        <td>{{i['who_make']}}</td>
+                                        <td>{{i['code_number']}}</td>
+                                        <td>{{i['code_speed']}}</td>
+                                        <td>{{i['class_level']}}</td>
+                                        <td>{{i['appendix']}}</td>
+                                        </tr>
+                                    </tbody>
+                                {%endfor%}
+                                </li>
+                            </table>
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
-
+        <div class="col-lg-6 mb-4">
         <!-- Approach -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">人資消息</h6>
             </div>
             <div class="card-body">
+                <div class="card-body">
+                    <div class="chart-area">
+                        <div class=" mx-auto table-responsive-sm row text-center ">
+                            <table class="table table-hover text-nowrap ">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">發布日期</th>
+                                        <th scope="col">發布單位</th>
+                                        <th scope="col">主旨</th>
+                                        <th scope="col">摘要</th>
+                                        <th scope="col">發布人</th>
+                                    </tr>
+                                </thead>
+                                <li class='list-unstyled justify-content-between d-flex h6'>
+                                {%for i in code_results%}
+                                    <tbody id="myTable">
+                                        <tr>
+                                        <td class="text-primary">{{i['code_date']}}</td>
+                                        <td>{{i['who_make']}}</td>
+                                        <td>{{i['code_number']}}</td>
+                                        <td>{{i['code_speed']}}</td>
+                                        <td>{{i['class_level']}}</td>
+                                        <td>{{i['appendix']}}</td>
+                                        </tr>
+                                    </tbody>
+                                {%endfor%}
+                                </li>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

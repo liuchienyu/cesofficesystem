@@ -1482,8 +1482,8 @@ pre code {
         max-width: 50%
     }
     .col-xl-7 {
-        flex: 0 0 58.33333%;
-        max-width: 58.33333%
+        flex: 0 0 100%;
+        max-width: 100%
     }
     .col-xl-8 {
         flex: 0 0 75%;
@@ -10847,7 +10847,7 @@ a:focus {
 }
 
 .sidebar .sidebar-card .sidebar-card-illustration {
-    height: 3rem;
+    height: 13rem;
     display: block
 }
 

@@ -6,9 +6,8 @@ from random import choice
 import smtplib
 from email.mime.text import MIMEText
 
-l = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] 
-
 def job1(*args):
+    l = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] 
     with open('tasks', 'a') as f:
         f.write('[{}]{}\n'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), str(choice(l)))) 
     with open('tasks', 'r') as ff:
