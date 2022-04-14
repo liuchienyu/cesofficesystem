@@ -155,7 +155,7 @@ def send_paper():
         a5 = request.values['letter_1']
         sendpaper(a1, a2, a3, a4, a5)
         alert_base = '公文送出完成'
-        alert_base_herf = 'send_paper'
+        alert_base_herf = 'send'
         return render_template("alert_base.html",alert_base=alert_base,alert_base_herf = alert_base_herf)
 
     else:
@@ -224,7 +224,7 @@ def send_paper_number():
         a7 = request.values['recipient']
         document_code_data_in(a1, a2, a3, a4, a5,a6,a7)
         alert_base = '申請送出完成'
-        alert_base_herf = 'paper_number_show'
+        alert_base_herf = 'papernumber_show'
         return render_template("alert_base.html",alert_base=alert_base,alert_base_herf = alert_base_herf)
 
 @app.route("/papernumber_show")
