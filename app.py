@@ -45,7 +45,6 @@ CONNECTION_STRING ="mongodb+srv://dandy40605:1234@cluster0.qqbqe.mongodb.net/myF
 client = MongoClient(CONNECTION_STRING,tls=True, tlsAllowInvalidCertificates=True,tz_aware=True )#tls=True, tlsAllowInvalidCertificates=True為解決無法連線問題
 
 
-
 @app.before_request
 def before_request():
     g.user = None
@@ -98,6 +97,7 @@ def homepage():
 @app.route("/home")
 @login_required
 def home():
+   
     db = client.systemdata
     base_info = db.document_code_data
     count_results = base_info.count_documents({'category':'文號申請'})
