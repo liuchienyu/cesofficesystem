@@ -6,7 +6,7 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">首頁(Beta 1.3.0版）</h1>
+    <h1 class="h3 mb-0 text-gray-800">首頁(Beta 1.3.1版）</h1>
     <a href="download" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
             class="fas fa-download fa-sm text-white-50"></i> 下載報表</a>
 </div>
@@ -21,8 +21,8 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            尚未完成考勤紀錄天數</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">4天</div>
+                           今日待辦事項</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">--件</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -105,7 +105,7 @@
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between ">
-                <h6 class="m-0 font-weight-bold text-primary ">代辦公文簡覽</h6>
+                <h6 class="m-0 font-weight-bold text-primary ">待辦公文簡覽</h6>
             </div>
             <!-- Card Body -->
             <div class="card-body">
@@ -129,8 +129,20 @@
                                     <td class="text-primary">{{i['code_date']}}</td>
                                     <td>{{i['who_make']}}</td>
                                     <td>{{i['code_number']}}</td>
-                                    <td>{{i['code_speed']}}</td>
-                                    <td>{{i['class_level']}}</td>
+                                    {% if i['code_speed']== '最速件'%}
+                                        <td style = "color: red;">{{i['code_speed']}}</td>
+                                    {% elif i['code_speed']== '速件'%}
+                                        <td style = "color: blue;">{{i['code_speed']}}</td>
+                                    {% elif i['code_speed']== '特殊件'%}
+                                        <td style = "color: green;">{{i['code_speed']}}</td>
+                                    {% else%}
+                                        <td >{{i['code_speed']}}</td>
+                                    {%endif%}
+                                    {% if i['class_level']== '非機密'%}
+                                        <td >{{i['class_level']}}</td>
+                                    {% else%}
+                                        <td style = "color: orange;">{{i['class_level']}}</td>
+                                    {%endif%}
                                     <td>{{i['appendix']}}</td>
                                     </tr>
                                 </tbody>

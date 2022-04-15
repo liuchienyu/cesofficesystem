@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from flask_sqlalchemy import SQLAlchemy
 import pdfkit, os
 from test_email import sendpaper
-from test_data import clockin, document_code_data_in
+from data_input import clockin, document_code_data_in
 from functools import wraps
 from werkzeug.utils import secure_filename
 from sqlalchemy import create_engine
@@ -318,11 +318,15 @@ def information_department_page():
 def HR_department():
     return render_template("HR_department.html")
 
-
 @app.route("/general_management_office")
 @login_required
 def general_management_office():
     return render_template("general_management_office.html")
+
+@app.route("/class_schedule")
+@login_required
+def class_schedule():
+    return render_template("class_schedule.html")
     
 if __name__ == "__main__":
     app.run(debug=True)

@@ -9,8 +9,9 @@
         <table class="table table-hover text-nowrap">
             <thead>
                 <tr>
-                    <th scope="col">打卡日期</th>
-                    <th scope="col">打卡狀態</th>
+                    <th scope="col">日期</th>
+                    <th scope="col">類別</th>
+                    <th scope="col">狀態</th>
                     <th scope="col">識別證號</th>
                     <th scope="col">異動申請</th>
                 </tr>
@@ -21,11 +22,11 @@
                             <tbody id="myTable">
                                 <tr>
                                 <td>{{i['code_date']}}</td>
+                                <td>{{i['category']}}</td>
                                 <td>{{i['state']}}</td>
                                 <td>{{i['code_number']}}</td>
                                 <td><div class="d-grid gap-2 d-md-block">
-                                    <button class="btn btn-outline-success" type="button">同意</button>
-                                    <button class="btn btn-outline-danger" type="button">駁回</button>
+                                    <button class="btn btn-outline-primary" type="button">變更</button>
                                     </div></td>
                                 </tr>
                             </tbody>
