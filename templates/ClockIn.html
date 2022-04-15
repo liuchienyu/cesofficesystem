@@ -5,9 +5,10 @@
 
     <!-- Page Heading -->
     <p class="h1 mb-3 text-gray-800">打卡系統</p>
-    <p class="h1 mb-3 text-gray-800">上班時間：20:00 ~ 23:00</p>
+    <p class="h1 mb-3 text-gray-800">{{time_base}}</p>
     <!-- Date -->
     <span class="h1 text-gray-800" id="Date"></span>
+    <p class="h4 mb-3 text-gray-800">現在應值班人員：{{time_base2}}</p>
     <!-- Content Row -->
     <div class="row mt-3">
 
@@ -27,13 +28,13 @@
                             var m = NowDate.getMinutes();
                             var s = NowDate.getSeconds();
                             if (mm < 10 && dd < 10) {
-                                document.getElementById("Date").innerHTML = yy + "/0" + mm + "/0" + dd + " ";
+                                document.getElementById("Date").innerHTML = yy + "年0" + mm + "月0" + dd + "日";
                             } else if (mm < 10 && dd >= 10) {
-                                document.getElementById("Date").innerHTML = yy + "/0" + mm + "/" + dd + " ";
+                                document.getElementById("Date").innerHTML = yy + "年0" + mm + "月" + dd + "日";
                             } else if (mm >= 10 && dd < 10) {
-                                document.getElementById("Date").innerHTML = yy + "/" + mm + "/0" + dd + " ";
+                                document.getElementById("Date").innerHTML = yy + "年" + mm + "月0" + dd + "日";
                             } else {
-                                document.getElementById("Date").innerHTML = yy + "/" + mm + "/" + dd + " ";
+                                document.getElementById("Date").innerHTML = yy + "年" + mm + "月" + dd + "日";
                             }
                             //先判斷分和秒是否為個位數，是的話+0
                             var t = document.getElementById("showbox");
@@ -70,10 +71,10 @@
     <div class="row mb-3">
         <div class="col-md-3"> </div>
         <div class="col-7 col-md-3 mb-3 mx-auto">
-            <button class="btn btn-lg btn-outline-info w-100">上班/簽到</button>
+            <a class="btn btn-lg btn-outline-info w-100" href = "go_to_work">上班/簽到</a>
         </div>
         <div class="col-7 col-md-3 mx-auto">
-            <button class="btn btn-lg btn-outline-info w-100">下班/簽退</button>
+            <a class="btn btn-lg btn-outline-info w-100" href = 'out_to_work'>下班/簽退</a>
         </div>
         <div class="col-md-3"> </div>
     </div>
@@ -84,25 +85,8 @@
             <button class="btn btn-lg btn-outline-info w-100">請假</button>
         </div>
         <div class="col-7 col-md-3 mx-auto">
-            <button class="btn btn-lg btn-outline-info w-100">打卡申訴</button>
+            <button class="btn btn-lg btn-outline-info w-100">考勤異動申請</button>
         </div>
         <div class="col-md-3"> </div>
     </div>
-
-</div>
-<!-- /.container-fluid -->
-
-</div>
-<!-- End of Main Content -->
-
-</div>
-<!-- End of Content Wrapper -->
-
-</div>
-<!-- End of Page Wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
 {% endblock %}

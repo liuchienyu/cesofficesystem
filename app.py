@@ -1,11 +1,12 @@
-from flask import Flask, Blueprint, flash, render_template, redirect, url_for, render_template, request, session, g
-from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+import time
+from flask import Flask, render_template, redirect, url_for, render_template, request, session, g
+from flask_login import  login_required
 from datetime import timedelta
 from django.contrib.auth.decorators import login_required
 from flask_sqlalchemy import SQLAlchemy
 import pdfkit, os
 from test_email import sendpaper
-from test_data import document_code_data_find, document_code_data_in
+from test_data import clockin, document_code_data_in
 from functools import wraps
 from werkzeug.utils import secure_filename
 from sqlalchemy import create_engine
@@ -105,7 +106,14 @@ def home():
 @app.route("/activity_record")
 @login_required
 def activity_record():
-    return render_template("activity_record.html")
+    db = client.systemdata
+    base_info = db.clockin
+    count_results = base_info.count_documents({'category':'打卡'})
+    code_results = base_info.find({'code_number':session['user_id']})
+    code_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
+    code_results.limit(10)#限制數量
+
+    return render_template("activity_record.html",count_results= count_results,code_results = code_results)
 
 
 @app.route("/profile")
@@ -164,14 +172,39 @@ def send_paper():
 @app.route("/ClockIn")
 @login_required
 def ClockIn():
-    return render_template("ClockIn.html")
+    time_1 = time.strftime('%H:%M:%S', time.localtime())
+    if '24:00:00' >= time_1 >= '20:00:00':
+        time_base = '現在是上班時間，請記得打上班卡'
+        if '21:45:00'>= time_1 >= '20:00:00':
+            time_base2= '值班主管、早班成員'
+            return render_template("ClockIn.html",time_base=time_base,time_base2=time_base2)
+        else:
+            time_base2= '值班主管、晚班成員'
+            return render_template("ClockIn.html",time_base=time_base,time_base2=time_base2)
+    else:
+        time_base = '現在是下班時間，請記得打下班卡'
+        time_base2 = '無'
+        return render_template("ClockIn.html",time_base=time_base,time_base2=time_base2)
 
 @app.route("/go_to_work")
 @login_required
 def go_to_work():
-    return render_template("alert_gtw.html")
+    a1 = '上班'
+    a2 = session['user_id']
+    clockin(a1, a2)
+    alert_base = '上班打卡完成'
+    alert_base_herf = 'ClockIn'
+    return render_template("alert_base.html",alert_base=alert_base,alert_base_herf = alert_base_herf)
 
-
+@app.route("/out_to_work")
+@login_required
+def out_to_work():
+    a1 = '下班'
+    a2 = session['user_id']
+    clockin(a1, a2)
+    alert_base = '下班打卡完成'
+    alert_base_herf = 'ClockIn'
+    return render_template("alert_base.html",alert_base=alert_base,alert_base_herf = alert_base_herf)
 @app.route("/finance")
 @login_required
 def finance():

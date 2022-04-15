@@ -1,11 +1,10 @@
 import datetime,time,pymongo
-from flask import g
 from pymongo import MongoClient
+
 CONNECTION_STRING ="mongodb+srv://dandy40605:1234@cluster0.qqbqe.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 client = MongoClient(CONNECTION_STRING,tls=True, tlsAllowInvalidCertificates=True,tz_aware=True )#tls=True, tlsAllowInvalidCertificates=True為解決無法連線問題
+
 def document_code_data_in(a,b,c,d,e,f,g):
-
-
     db = client.systemdata
     document_code_data = db.document_code_data
     code_results = document_code_data.find({'category':'文號申請'},{'_id':1})
@@ -46,3 +45,63 @@ def document_code_data_find(a):
     code_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
     code_results.limit(1)#限制數量
     return code_results
+
+def clockin(a,b):
+    db = client.systemdata
+    clockin = db.clockin
+    clockin_results = clockin.find({'category':'打卡'},{'_id':1})
+    clockin_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
+    clockin_results.limit(1)#限制數量
+    print(clockin_results[0])
+
+    #計算文件數量並編號
+    if clockin_results != None:
+        id = 0
+        while clockin_results != None:
+            clockin_results = clockin.find_one({'_id':id})
+
+            id=clockin.count_documents({'category':'打卡'},)+1
+        else:
+            print(id)
+
+    post = {"_id":id,
+    "make_time":datetime.datetime.now(), 
+    "code_date":time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), 
+    'state':a,
+    'state2':'上班打卡',
+    'code_number':b,
+    'category':'打卡',
+    "search_date":time.strftime("%Y-%m-%d", time.localtime()),
+    }
+
+    clock_result = clockin.insert_one(post)
+
+def clockout(a,b):
+    db = client.systemdata
+    clockin = db.clockin
+    clockout_results = clockin.find({'category':'打卡'},{'_id':1})
+    clockout_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
+    clockout_results.limit(1)#限制數量
+    print(clockout_results[0])
+
+    #計算文件數量並編號
+    if clockout_results != None:
+        id = 0
+        while clockout_results != None:
+            clockout_results = clockin.find_one({'_id':id})
+
+            id=clockin.count_documents({'category':'打卡'},)+1
+        else:
+            print(id)
+
+    post = {"_id":id,
+    "make_time":datetime.datetime.now(), 
+    "code_date":time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), 
+    'state':a,
+    'state2':'下班打卡',
+    'code_number':b,
+    'category':'打卡',
+    "search_date":time.strftime("%Y-%m-%d", time.localtime()),
+    }
+
+    clock_result = clockin.insert_one(post)
