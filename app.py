@@ -1,3 +1,4 @@
+import datetime
 import time
 from flask import Flask, render_template, redirect, url_for, render_template, request, session, g
 from flask_login import  login_required
@@ -24,6 +25,8 @@ UPLOAD_FOLDER = './static/images'
 ALLOWED_EXTENSIONS = set(['pdf', 'png', 'jpg', 'jpeg', 'gif'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB
+# 設定為 +8 時區
+tz = datetime.timezone(datetime.timedelta(hours=+8))
 
 db = SQLAlchemy()
 #datebase1
@@ -172,8 +175,9 @@ def send_paper():
 @app.route("/ClockIn")
 @login_required
 def ClockIn():
-    time_1 = time.strftime('%H:%M:%S', time.localtime())
-    if '24:00:00' >= time_1 >= '20:00:00':
+    time_1 = datetime.datetime.now(tz).strftime("%H:%M:%S")
+    print(time_1)
+    if '24:00:00' >=time_1 >= '20:00:00':
         time_base = '現在是上班時間，請記得打上班卡'
         if '21:45:00'>= time_1 >= '20:00:00':
             time_base2= '值班主管、早班成員'
