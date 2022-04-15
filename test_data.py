@@ -3,7 +3,8 @@ from pymongo import MongoClient
 
 CONNECTION_STRING ="mongodb+srv://dandy40605:1234@cluster0.qqbqe.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 client = MongoClient(CONNECTION_STRING,tls=True, tlsAllowInvalidCertificates=True,tz_aware=True )#tls=True, tlsAllowInvalidCertificates=True為解決無法連線問題
-
+# 設定為 +8 時區
+tz = datetime.timezone(datetime.timedelta(hours=+8))
 def document_code_data_in(a,b,c,d,e,f,g):
     db = client.systemdata
     document_code_data = db.document_code_data
@@ -24,7 +25,7 @@ def document_code_data_in(a,b,c,d,e,f,g):
 
     post = {"_id":id,
     "make_time":datetime.datetime.now(), 
-    "code_date":time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), 
+    "code_date":datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S"), 
     'code_name':a,
     'code_number':b + '22' + str(id).zfill(4)+'號',
     'code_speed':c,
@@ -66,12 +67,12 @@ def clockin(a,b):
 
     post = {"_id":id,
     "make_time":datetime.datetime.now(), 
-    "code_date":time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), 
+    "code_date":datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S"), 
     'state':a,
     'state2':'上班打卡',
     'code_number':b,
     'category':'打卡',
-    "search_date":time.strftime("%Y-%m-%d", time.localtime()),
+    "search_date":datetime.datetime.now(tz).strftime("%Y-%m-%d"),
     }
 
     clock_result = clockin.insert_one(post)
@@ -96,12 +97,12 @@ def clockout(a,b):
 
     post = {"_id":id,
     "make_time":datetime.datetime.now(), 
-    "code_date":time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), 
+    "code_date":datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S"), 
     'state':a,
     'state2':'下班打卡',
     'code_number':b,
     'category':'打卡',
-    "search_date":time.strftime("%Y-%m-%d", time.localtime()),
+    "search_date":datetime.datetime.now(tz).strftime("%Y-%m-%d"),
     }
 
     clock_result = clockin.insert_one(post)
