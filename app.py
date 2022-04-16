@@ -209,11 +209,21 @@ def out_to_work():
     alert_base = '下班打卡完成'
     alert_base_herf = 'ClockIn'
     return render_template("alert_base.html",alert_base=alert_base,alert_base_herf = alert_base_herf)
-@app.route("/finance")
-@login_required
-def finance():
-    return render_template("finance.html")
 
+@app.route("/finance_show")
+@login_required
+def finance_show():
+    return render_template("finance_show.html")
+
+@app.route("/finance_in")
+@login_required
+def finance_in():
+    return render_template("finance_in.html")
+
+@app.route("/finance_check")
+@login_required
+def finance_check():
+    return render_template("finance_check.html")
 
 @app.route("/Leave")
 @login_required
@@ -326,7 +336,11 @@ def general_management_office():
 @app.route("/class_schedule")
 @login_required
 def class_schedule():
-    return render_template("class_schedule.html")
+    db = client.systemdata
+    base_info = db.base_info
+    code_results = base_info.find({'category':'個資'})
+    code_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
+    return render_template("class_schedule.html",code_results = code_results)
     
 if __name__ == "__main__":
     app.run(debug=True)
