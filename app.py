@@ -77,11 +77,13 @@ def login():
         print(user2)
         if  user1 != None and user2 != None :
             session['user_id'] = username_r
-            return redirect(url_for('home'))
+            return render_template('login_wait.html')
 
         return redirect(url_for('login'))
 
     return render_template('login-a.html')
+
+
 
 @app.route('/logout')
 def logout():
