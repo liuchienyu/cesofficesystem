@@ -124,12 +124,12 @@ def activity_record():
 @app.route("/profile")
 @login_required
 def profile():
-    return render_template('profile.html')
+    return render_template('./profile/profile.html')
 
 @app.route("/more")
 @login_required
 def more():
-    return render_template("more_profile.html")
+    return render_template("./profile/more_profile.html")
 
 
 @app.route("/download")
@@ -241,7 +241,7 @@ def overtime():
 @app.route("/profile_setting",methods=['GET', 'POST'])
 @login_required
 def profile_setting():
-    return render_template("profile_setting_base.html")
+    return render_template("./profile/profile_setting_base.html")
 
 @app.route("/profile_updata", methods=['GET', 'POST'])
 @login_required
@@ -343,6 +343,16 @@ def class_schedule():
     code_results = base_info.find({'category':'個資'})
     code_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
     return render_template("class_schedule.html",code_results = code_results)
-    
+
+@app.route("/announcement")
+@login_required
+def announcement():
+    return render_template("./announcement/announcement.html")
+
+@app.route("/announcement_in")
+@login_required
+def announcement_in():
+    return render_template("./announcement/announcement_in.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
