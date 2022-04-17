@@ -13,7 +13,7 @@ def sendpaper(a,b,c,d,e):
     msg["From"]=from_a
     msg["To"]=to_b
     msg["Subject"]="你好"
-    mss=Path("templates/paperbase.html").read_text()
+    mss=Path("templates/paper/paperbase.html").read_text()
 
     userss= a
     ytimes=b

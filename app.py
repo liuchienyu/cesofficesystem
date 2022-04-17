@@ -77,11 +77,11 @@ def login():
         print(user2)
         if  user1 != None and user2 != None :
             session['user_id'] = username_r
-            return render_template('login_wait.html')
+            return render_template('./login/login_wait.html')
 
         return redirect(url_for('login'))
 
-    return render_template('login-a.html')
+    return render_template('./login/login-a.html')
 
 
 
@@ -118,7 +118,7 @@ def activity_record():
     code_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
     code_results.limit(10)#限制數量
 
-    return render_template("activity_record.html",count_results= count_results,code_results = code_results)
+    return render_template("./profile/activity_record.html",count_results= count_results,code_results = code_results)
 
 
 @app.route("/profile")
@@ -135,7 +135,7 @@ def more():
 @app.route("/download")
 @login_required
 def download():
-    return render_template("download.html")
+    return render_template("./secretary_room/download.html")
 
 
 @app.route("/download_to", methods=['POST'])
@@ -147,7 +147,7 @@ def download_to():
         pdfkit.from_url(html_name, save_name)
         return render_template("home.html")
     else:
-        return render_template("download.html")
+        return render_template("./secretary_room/download.html")
 
 
 @app.route("/send")
@@ -168,10 +168,10 @@ def send_paper():
         sendpaper(a1, a2, a3, a4, a5)
         alert_base = '公文送出完成'
         alert_base_herf = 'send'
-        return render_template("alert_base.html",alert_base=alert_base,alert_base_herf = alert_base_herf)
+        return render_template("./base/alert_base.html",alert_base=alert_base,alert_base_herf = alert_base_herf)
 
     else:
-        return render_template("send.html")
+        return render_template("./secretary_room/send.html")
 
 
 @app.route("/ClockIn")
@@ -190,7 +190,7 @@ def ClockIn():
     else:
         time_base = '現在是下班時間，請記得打下班卡'
         time_base2 = '無'
-        return render_template("ClockIn.html",time_base=time_base,time_base2=time_base2)
+        return render_template("./HR_department/ClockIn.html",time_base=time_base,time_base2=time_base2)
 
 @app.route("/go_to_work")
 @login_required
@@ -200,7 +200,7 @@ def go_to_work():
     clockin(a1, a2)
     alert_base = '上班打卡完成'
     alert_base_herf = 'ClockIn'
-    return render_template("alert_base.html",alert_base=alert_base,alert_base_herf = alert_base_herf)
+    return render_template("./base/alert_base.html",alert_base=alert_base,alert_base_herf = alert_base_herf)
 
 @app.route("/out_to_work")
 @login_required
@@ -210,33 +210,33 @@ def out_to_work():
     clockin(a1, a2)
     alert_base = '下班打卡完成'
     alert_base_herf = 'ClockIn'
-    return render_template("alert_base.html",alert_base=alert_base,alert_base_herf = alert_base_herf)
+    return render_template("./base/alert_base.html",alert_base=alert_base,alert_base_herf = alert_base_herf)
 
 @app.route("/finance_show")
 @login_required
 def finance_show():
-    return render_template("finance_show.html")
+    return render_template("./finance_department/finance_show.html")
 
 @app.route("/finance_in")
 @login_required
 def finance_in():
-    return render_template("finance_in.html")
+    return render_template("./finance_department/finance_in.html")
 
 @app.route("/finance_check")
 @login_required
 def finance_check():
-    return render_template("finance_check.html")
+    return render_template("./finance_department/finance_check.html")
 
 @app.route("/Leave")
 @login_required
 def Leave():
-    return render_template("Leave.html")
+    return render_template("./HR_department/Leave.html")
 
 
 @app.route("/overtime")
 @login_required
 def overtime():
-    return render_template("overtime.html")
+    return render_template("./HR_department/overtime.html")
 
 @app.route("/profile_setting",methods=['GET', 'POST'])
 @login_required
@@ -256,7 +256,7 @@ def profile_updata():
 @app.route("/paper_number")
 @login_required
 def paper_number():
-    return render_template("paper_number.html")
+    return render_template("./paper/paper_number.html")
 
 
 @app.route("/send_paper_number", methods=['POST'])
@@ -273,7 +273,7 @@ def send_paper_number():
         document_code_data_in(a1, a2, a3, a4, a5,a6,a7)
         alert_base = '申請送出完成'
         alert_base_herf = 'papernumber_show'
-        return render_template("alert_base.html",alert_base=alert_base,alert_base_herf = alert_base_herf)
+        return render_template("./base/alert_base.html",alert_base=alert_base,alert_base_herf = alert_base_herf)
 
 @app.route("/papernumber_show")
 @login_required
@@ -283,7 +283,7 @@ def papernumber_show():
     code_results = base_info.find({'category':'文號申請'})
     code_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
     code_results.limit(10)#限制數量
-    return render_template("papernumber_show.html",code_results=code_results)
+    return render_template("./paper/papernumber_show.html",code_results=code_results)
 
 
 def allowed_file(filename):
@@ -301,8 +301,8 @@ def upload():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             os.chdir(UPLOAD_FOLDER)
             os.rename(filename,  filerename)
-            return render_template("uploaded_file.html")
-    return render_template("uploaded_file.html")  
+            return render_template("./secretary_room/uploaded_file.html")
+    return render_template("./secretary_room/uploaded_file.html")  
 
 @app.route("/testpage")
 @login_required
@@ -313,27 +313,27 @@ def tastpage():
 @app.route("/secretary_room_page")
 @login_required
 def secretary_room_page():
-    return render_template("secretary_room_page.html")
+    return render_template("./secretary_room/secretary_room_page.html")
 
 @app.route("/finance_department_page")
 @login_required
 def finance_department_page():
-    return render_template("finance_department_page.html")
+    return render_template("./finance_department/finance_department_page.html")
 
 @app.route("/information_department_page")
 @login_required
 def information_department_page():
-    return render_template("information_department_page.html")
+    return render_template("./information_department/information_department_page.html")
 
 @app.route("/HR_department")
 @login_required
 def HR_department():
-    return render_template("HR_department.html")
+    return render_template("./HR_department/HR_department.html")
 
 @app.route("/general_management_office")
 @login_required
 def general_management_office():
-    return render_template("general_management_office.html")
+    return render_template("./general_management_office/general_management_office.html")
 
 @app.route("/class_schedule")
 @login_required
@@ -342,7 +342,7 @@ def class_schedule():
     base_info = db.base_info
     code_results = base_info.find({'category':'個資'})
     code_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
-    return render_template("class_schedule.html",code_results = code_results)
+    return render_template("./HR_department/class_schedule.html",code_results = code_results)
 
 @app.route("/announcement")
 @login_required
