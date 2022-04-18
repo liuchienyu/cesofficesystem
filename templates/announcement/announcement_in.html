@@ -8,7 +8,7 @@
 
 <!-- Second container -->
 <form method="POST" action="{{url_for('announcement_in')}}"class="row g-3 mb-4">
-    <div class="col-md-4  mb-4">
+    <div class="col-md-3  mb-4">
         <label for="inputCity" class="form-label">發布日期</label>
         <input type="text" class="form-control text-center" name="applyDate" id="applyDate" disabled>
             <script>
@@ -27,9 +27,21 @@
                     setTimeout("showDate()", 1000);
                 }
             </script> 
-        </input>     
-    </div>
-      <div class="col-md-4">
+        </input>
+      </div>
+      <div class="col-md-3">
+        <label for="inputState" class="form-label">公告類別</label>
+        <select class="form-select form-select-lg btn btn-outline-info w-100 text-center"
+            name="announcement_category" id="announcement_category" aria-label=".form-select-lg example">
+            <option selected>請選擇</option>
+            <option value="一般公告">一般公告</option>
+            <option value="一般公告">會議公告</option>
+            <option value="一般公告">解釋公告</option>
+            <option value="一般公告">命令公告</option>
+            <option value="一般公告">獎懲公告</option>
+        </select>
+      </div>
+      <div class="col-md-3">
         <label for="inputState" class="form-label">發布單位</label>
         <select class="form-select form-select-lg btn btn-outline-info w-100 text-center"
             name="department" id="department" aria-label=".form-select-lg example">
@@ -48,8 +60,8 @@
             <option value="研發一組">研發一組</option>
             <option value="技術一組">技術一組</option>
         </select>
-      </div>
-      <div class="col-md-4">
+      </div>     
+      <div class="col-md-3">
         <label for="inputZip" class="form-label">發布人</label>
             <select class="form-select form-select-lg btn btn-outline-info w-100 text-center"
             name="applicant" id="applicant" aria-label=".form-select-lg example">
@@ -68,7 +80,11 @@
     </div>
     <div class="col-12 mb-4">
       <label for="inputAddress2" class="form-label">公告內文</label>
-      <input type="text" class="form-control" name="text_in" id="text_in" placeholder="請輸入公告內文">
+      <input type="text" class="form-control" style = 'height: 300px'name="text_in" id="text_in" placeholder="請輸入公告內文">
+    </div>
+    <div class="col-12 mb-4">
+      <label for="inputAddress2" class="form-label">附件名稱</label>
+      <input type="text" class="form-control" name="filename" id="filename" placeholder="請輸入附件名稱">
     </div>
     <div class="col-12 mb-4">
       <button type="#" class="btn btn-primary btn-center">發布</button>

@@ -1,45 +1,29 @@
 {% extends "./base/base.html" %}
 {% block body %}
-                
-<!-- Page Heading -->
+{%for i in code_results%}
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">團隊最新公告</h1>
-    <a href="announcement_in" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
-            class="fas fa-download fa-sm text-white-50"></i> 發布公告</a>
+    <h1 class=" mb-0 text-gray-800">{{i['subject']}}</h1>
 </div>
-
-<!-- Third container -->
-<div class="row-50% text-center">
-    <div class=" mx-auto table-responsive">
-        <table class="table text-nowrap">
-            <tbody class="h4">
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h6 class=" mb-0 text-gray-800">公告分類：{{i['announcement_category']}}  ,  發布單位：{{i['unit']}}  {{i['who']}}</h6>
+    <h6 class=" mb-0 text-gray-800">發布時間：{{i['code_date']}}</h6>
+</div>
+<div class="dropdown-divider"></div>
+<div  style="height: 400px">
+    <div class="row ">
+        <div class=" mx-auto table-responsive" height = "400px">
+            <table class="table table-hover text-nowrap">
                 <tr>
-                    <td id="公告分類" class="text-left">公告分類：紙類</td>
-                    <td id="時間" class="text-right">發布時間：2022/4/17 21:24:27</td>
+                    <h5 class=" mb-0 text-gray-800">{{i['text_in']}}</h5>
                 </tr>
-                <tr>
-                    <td id="公告主旨" class="text-left" colspan="2">公告主旨：幫正成加薪</td>
-                </tr>
-                <tr>
-                    <td id="內文標誌" class="text-left" colspan="2">內文：</td>
-                </tr>
-                <tr>
-                    <td id="內文內容" class="text-left border-0" height="300px" colspan="2">快阿快阿正成要窮死了</td>
-                </tr>
-                <tr>
-                    <div class="col-12 mb-4">
-                        <a href="static/download_file/1110401公告.pdf" download="1110401公告.pdf">下載檔案測試</a>
-                      </div>
-                    <div class="col-12 mb-4">
-                </tr>
-                <tr>
-                    <td id="發布單位" class="text-left">發布單位：資訊部</td>
-                    <td id="發布人" class="text-right">發布人：侯正成</td>
-                </tr>
-            </tbody>
-        </table>
+            </table>
+        </div>
     </div>
+</div> 
+<div class="dropdown-divider"></div>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h6 class=" mb-0 text-gray-800">附件檔案下載：<a href="/static/download_file/{{i['filename']}}" download="{{i['filename']}}">{{i['filename']}}</a></h6>
 </div>
 <!-- end Third container -->
-
+{%endfor%}
 {% endblock %}

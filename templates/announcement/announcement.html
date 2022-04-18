@@ -19,9 +19,8 @@
                 <tr>
                     <th>發布日期</th>
                     <th>發布單位</th>
+                    <th>公告類別</th>
                     <th>主旨</th>
-                    <th>摘要</th>
-                    <th>發布人</th>
                 </tr>
             </thead>
             <li class='list-unstyled justify-content-between d-flex h6'>
@@ -30,9 +29,8 @@
                     <tr>
                     <td class="text-primary">{{i['code_date']}}</td>
                     <td>{{i['unit']}}</td>
-                    <td>{{i['subject']}}</td>
-                    <td>{{i['text_in']}}</td>
-                    <td>{{i['who']}}</td>
+                    <td>{{i['announcement_category']}}</td>
+                    <td><a href="announcement/{{i['search_id']}}">{{i['subject']}}</a></td>
                     </tr>
                 </tbody>
                 {%endfor%}

@@ -108,7 +108,7 @@ def clockout(a,b):
 
     clock_result = clockin.insert_one(post)
 
-def announcement_imput(a,b,c,d):
+def announcement_imput(a,b,c,d,e,f):
     db = client.systemdata
     announcement = db.announcement
     announcement_results = announcement.find({'category':'公告'},{'_id':1})
@@ -134,7 +134,10 @@ def announcement_imput(a,b,c,d):
     'subject':c,
     'text_in':d,
     "search_date":time.strftime("%Y-%m-%d", time.localtime()),
-    'category':'公告'
+    'category':'公告',
+    'announcement_category':e,
+    'filename':f,
+    'search_id':'F'+id
     }
 
     announcement_result = announcement.insert_one(post)
