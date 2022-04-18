@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from flask_sqlalchemy import SQLAlchemy
 import pdfkit, os
 from test_email import sendpaper
-from data_input import clockin, document_code_data_in
+from data_input import announcement_imput, clockin, document_code_data_in
 from functools import wraps
 from werkzeug.utils import secure_filename
 from sqlalchemy import create_engine
@@ -20,8 +20,8 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 app.secret_key = "#230dec61-fee8-4ef2-a791-36f9e680c9fc"
-app.permanent_session_lifetime = timedelta(minutes=30)
-UPLOAD_FOLDER = './static/images'
+app.permanent_session_lifetime = timedelta(hours=2)
+UPLOAD_FOLDER = './static/download_file'
 ALLOWED_EXTENSIONS = set(['pdf', 'png', 'jpg', 'jpeg', 'gif'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB
@@ -102,11 +102,16 @@ def home():
    
     db = client.systemdata
     base_info = db.document_code_data
+    base_info2 = db.announcement
     count_results = base_info.count_documents({'category':'文號申請'})
+    count_results2 = base_info2.count_documents({'category':'公告'})
     code_results = base_info.find({'category':'文號申請'})
+    code_results2 = base_info2.find({'category':'公告'})
     code_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
+    code_results2.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
     code_results.limit(5)#限制數量
-    return render_template("home.html", count_results= count_results,code_results = code_results)
+    code_results2.limit(5)#限制數量
+    return render_template("home.html", count_results= count_results,count_results2= count_results2,code_results = code_results,code_results2 = code_results2)
 
 @app.route("/activity_record")
 @login_required
@@ -347,12 +352,28 @@ def class_schedule():
 @app.route("/announcement")
 @login_required
 def announcement():
-    return render_template("./announcement/announcement.html")
+    db = client.systemdata
+    base_info = db.announcement
+    code_results = base_info.find({'category':'公告'})
+    code_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
+    code_results.limit(10)#限制數量
+    return render_template("./announcement/announcement.html",code_results=code_results)
 
-@app.route("/announcement_in")
+@app.route("/announcement_in", methods=['GET', 'POST'])
 @login_required
 def announcement_in():
-    return render_template("./announcement/announcement_in.html")
+    if request.method == 'POST':
+        a1 = request.values['department']
+        a2 = request.values['applicant']
+        a3=  request.form['subject']
+        a4= request.form['text_in']
+        announcement_imput(a1, a2,a3,a4)
+        alert_base = '公告發布完成'
+        alert_base2 = '點此上傳公告附件'
+        alert_base_herf = 'announcement'
+        alert_base_herf2 = 'upload'
+        return render_template("./base/alert_base.html",alert_base=alert_base,alert_base2=alert_base2,alert_base_herf = alert_base_herf,alert_base_herf2=alert_base_herf2)
+    return render_template("./announcement/announcement_in.html")  
 
 if __name__ == "__main__":
     app.run(debug=True)

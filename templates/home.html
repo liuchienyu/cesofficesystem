@@ -7,8 +7,6 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">首頁(Beta 1.4.0版）</h1>
-    <a href="download" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-            class="fas fa-download fa-sm text-white-50"></i> 下載報表</a>
 </div>
 
 <!-- Content Row -->
@@ -196,27 +194,26 @@
                         <table class="table table-hover text-nowrap ">
                             <thead>
                                 <tr>
-                                    <th scope="col">發布日期</th>
-                                    <th scope="col">發布單位</th>
-                                    <th scope="col">主旨</th>
-                                    <th scope="col">摘要</th>
-                                    <th scope="col">發布人</th>
+                                    <th>發布日期</th>
+                                    <th>發布單位</th>
+                                    <th>主旨</th>
+                                    <th>摘要</th>
+                                    <th>發布人</th>
                                 </tr>
                             </thead>
                             <li class='list-unstyled justify-content-between d-flex h6'>
-                            {%for i in code_results%}
-                                <tbody id="myTable">
-                                    <tr>
-                                    <td class="text-primary">{{i['code_date']}}</td>
-                                    <td>{{i['who_make']}}</td>
-                                    <td>{{i['code_number']}}</td>
-                                    <td>{{i['code_speed']}}</td>
-                                    <td>{{i['class_level']}}</td>
-                                    <td>{{i['appendix']}}</td>
-                                    </tr>
-                                </tbody>
-                            {%endfor%}
-                            </li>
+                                {%for x in code_results2%}
+                                    <tbody id="myTable2">
+                                        <tr>
+                                        <td class="text-primary">{{x['code_date']}}</td>
+                                        <td>{{x['unit']}}</td>
+                                        <td>{{x['subject']}}</td>
+                                        <td>{{x['text_in']}}</td>
+                                        <td>{{x['who']}}</td>
+                                        </tr>
+                                    </tbody>
+                                {%endfor%}
+                                </li>
                         </table>
                     </div>
                 </div>

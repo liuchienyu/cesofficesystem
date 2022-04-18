@@ -1,162 +1,78 @@
 {% extends "./base/base.html" %}
 {% block body %}
-                
+<body onload="showDate();showYear();">               
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">團隊最新公告</h1>
-    <a href="announcement_in" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
-            class="fas fa-download fa-sm text-white-50"></i> 發布公告</a>
+    <h1 class=" mb-0 text-gray-800">發布公告系統</h1>
 </div>
-
-<!-- Tales -->
-<div class="row-50% text-center">
-    <div class=" mx-auto table-responsive">
-        <table class="table table-hover text-nowrap">
-            <thead>
-                <tr>
-                    <td class="h2" colspan='5' id="title">公告</td>
-                </tr>
-                <tr>
-                    <th>發布日期</th>
-                    <th>發布單位</th>
-                    <th>主旨</th>
-                    <th>摘要</th>
-                    <th>發布人</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>2022/4/16</td>
-                    <td>總管理處</td>
-                    <td><a href="#">幫正成加薪</a></td>
-                    <td>加薪1萬塊</td>
-                    <td>劉建佑</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-<!-- /.container-fluid -->
 
 <!-- Second container -->
-
-<div class="row">
-    <div class="col-12 col-md-12 text-left">
-        <span class="h1 text-gray-800">發公告系統</span>
+<form method="POST" action="{{url_for('announcement_in')}}"class="row g-3 mb-4">
+    <div class="col-md-4  mb-4">
+        <label for="inputCity" class="form-label">發布日期</label>
+        <input type="text" class="form-control text-center" name="applyDate" id="applyDate" disabled>
+            <script>
+                function showDate() {
+                    var NowDate = new Date();
+                    var yy = NowDate.getFullYear();
+                    var mm = NowDate.getMonth() + 1;
+                    var dd = NowDate.getDate();
+                    var h = NowDate.getHours();
+                    var m = NowDate.getMinutes();
+                    var s = NowDate.getSeconds();
+                    h = (h < 10) ? "0" + h : h;
+                    m = (m < 10) ? "0" + m : m;
+                    s = (s < 10) ? "0" + s : s;
+                    document.getElementById('applyDate').value = yy + "/" + mm + "/" + dd + " " + h + "：" + m + "：" + s;
+                    setTimeout("showDate()", 1000);
+                }
+            </script> 
+        </input>     
     </div>
-</div>
-
-<div class="row mt-4 mb-4">
-    <div class="col-6 col-md-3 text-right">
-        <span class="h4 text-gray-800 w-100">發布日期：</span>
-    </div>
-
-    <div class="col-6 col-md-2 text-left">
-        <input type="text" class="text-center" name="applyDate" id="applyDate" disabled>
-
-        <script>
-            function showDate() {
-                var NowDate = new Date();
-                var yy = NowDate.getFullYear();
-                var mm = NowDate.getMonth() + 1;
-                var dd = NowDate.getDate();
-                document.getElementById('applyDate').value = yy + "/" + mm + "/" + dd;
-            }
-        </script>
-    </div>
-
-    <div class="col-6 col-md-3 text-right">
-        <span class="h4 text-gray-800 w-100">發布單位：</span>
-    </div>
-
-    <div class="col-6 col-md-2 text-left">
+      <div class="col-md-4">
+        <label for="inputState" class="form-label">發布單位</label>
         <select class="form-select form-select-lg btn btn-outline-info w-100 text-center"
             name="department" id="department" aria-label=".form-select-lg example">
             <option selected>請選擇</option>
-            <option value="1">總管理處</option>
-            <option value="2">監察室</option>
-            <option value="3">秘書室</option>
-            <option value="4">財務部</option>
-            <option value="5">出納科</option>
-            <option value="6">會計科</option>
-            <option value="7">人資部</option>
-            <option value="8">實習組</option>
-            <option value="9">資訊部</option>
-            <option value="10">研發科</option>
-            <option value="11">技術科</option>
-            <option value="12">研發一組</option>
-            <option value="13">技術一組</option>
+            <option value="總管理處">總管理處</option>
+            <option value="監察室">監察室</option>
+            <option value="秘書室">秘書室</option>
+            <option value="財務部">財務部</option>
+            <option value="出納科">出納科</option>
+            <option value="會計科">會計科</option>
+            <option value="人資部">人資部</option>
+            <option value="實習組">實習組</option>
+            <option value="資訊部">資訊部</option>
+            <option value="研發科">研發科</option>
+            <option value="技術科">技術科</option>
+            <option value="研發一組">研發一組</option>
+            <option value="技術一組">技術一組</option>
         </select>
-    </div>
-</div>
-
-<div class="row mb-4">
-    <div class="col-6 col-md-3 text-right">
-        <span class="h4 text-gray-800 w-100">主旨：</span>
-    </div>
-
-    <div class="col-6 col-md-2 text-left">
-        <input type="text" name="main_idea" id="main_idea" placeholder="請輸入主旨">
-    </div>
-
-    <div class="col-6 col-md-3 text-right">
-        <span class="h4 text-gray-800 w-100">內文：</span>
-    </div>
-
-    <div class="col-6 col-md-2 text-left">
-        <input type="text" size="20" name="summary" id="summary" placeholder="請輸入內文">
-    </div>
-</div>
-
-<div class="row mb-4">
-    <div class="col-6 col-md-3 text-right">
-        <span class="h4 text-gray-800 w-100">發布人：</span>
-    </div>
-
-    <div class="col-6 col-md-2 text-left">
-        <select class="form-select form-select-lg btn btn-outline-info w-100 text-center"
+      </div>
+      <div class="col-md-4">
+        <label for="inputZip" class="form-label">發布人</label>
+            <select class="form-select form-select-lg btn btn-outline-info w-100 text-center"
             name="applicant" id="applicant" aria-label=".form-select-lg example">
             <option selected>請選擇</option>
-            <option value="1">劉建佑</option>
-            <option value="2">侯正成</option>
-            <option value="3">陳星維</option>
-            <option value="4">劉軒志</option>
-            <option value="5">林彥合</option>
-            <option value="6">李知恩</option>
-        </select>
+            <option value="劉建佑">劉建佑</option>
+            <option value="侯正成">侯正成</option>
+            <option value="陳星維">陳星維</option>
+            <option value="劉軒志">劉軒志</option>
+            <option value="林彥合">林彥合</option>
+            <option value="李知恩">李知恩</option>
+            </select>
+        </div>
+    <div class="col-12 mb-4">
+      <label for="inputAddress" class="form-label">公告主旨</label>
+      <input type="text" class="form-control" name="subject" id="subject" placeholder="請輸入公告主旨">
     </div>
-</div>
-<!-- end Second container -->
-
-<!-- Third container -->
-<div class="row-50% text-center">
-    <div class=" mx-auto table-responsive">
-        <table class="table text-nowrap">
-            <tbody class="h4">
-                <tr>
-                    <td id="公告分類" class="text-left">公告分類：紙類</td>
-                    <td id="時間" class="text-right">發布時間：2022/4/17 21:24:27</td>
-                </tr>
-                <tr>
-                    <td id="公告主旨" class="text-left" colspan="2">公告主旨：幫正成加薪</td>
-                </tr>
-                <tr>
-                    <td id="內文標誌" class="text-left" colspan="2">內文：</td>
-                </tr>
-                <tr>
-                    <td id="內文內容" class="text-left border-0" height="300px" colspan="2">快阿快阿正成要窮死了</td>
-                </tr>
-                <tr>
-                    <td id="附件連結" class="text-left" colspan="2"><a href="#">附件連結：網址</a></td>
-                </tr>
-                <tr>
-                    <td id="發布單位" class="text-left">發布單位：資訊部</td>
-                    <td id="發布人" class="text-right">發布人：侯正成</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="col-12 mb-4">
+      <label for="inputAddress2" class="form-label">公告內文</label>
+      <input type="text" class="form-control" name="text_in" id="text_in" placeholder="請輸入公告內文">
     </div>
-</div>
-<!-- end Third container -->
-
+    <div class="col-12 mb-4">
+      <button type="#" class="btn btn-primary btn-center">發布</button>
+    </div>
+  </form>
 {% endblock %}
+

@@ -1,3 +1,4 @@
+from calendar import c
 import datetime,time,pymongo
 from pymongo import MongoClient
 
@@ -106,3 +107,34 @@ def clockout(a,b):
     }
 
     clock_result = clockin.insert_one(post)
+
+def announcement_imput(a,b,c,d):
+    db = client.systemdata
+    announcement = db.announcement
+    announcement_results = announcement.find({'category':'公告'},{'_id':1})
+    announcement_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
+    announcement_results.limit(1)#限制數量
+    print(announcement_results[0])
+
+    #計算文件數量並編號
+    if announcement_results != None:
+        id = 0
+        while announcement_results != None:
+            announcement_results = announcement.find_one({'_id':id})
+
+            id=announcement.count_documents({'category':'公告'},)+1
+        else:
+            print(id)
+
+    post = {"_id":id,
+    "make_time":datetime.datetime.now(), 
+    "code_date":time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), 
+    'unit':a,
+    'who':b,
+    'subject':c,
+    'text_in':d,
+    "search_date":time.strftime("%Y-%m-%d", time.localtime()),
+    'category':'公告'
+    }
+
+    announcement_result = announcement.insert_one(post)

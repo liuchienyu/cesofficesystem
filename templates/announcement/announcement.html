@@ -24,139 +24,22 @@
                     <th>發布人</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>2022/4/16</td>
-                    <td>總管理處</td>
-                    <td><a href="#">幫正成加薪</a></td>
-                    <td>加薪1萬塊</td>
-                    <td>劉建佑</td>
-                </tr>
-            </tbody>
+            <li class='list-unstyled justify-content-between d-flex h6'>
+                {%for i in code_results%}
+                <tbody id="myTable">
+                    <tr>
+                    <td class="text-primary">{{i['code_date']}}</td>
+                    <td>{{i['unit']}}</td>
+                    <td>{{i['subject']}}</td>
+                    <td>{{i['text_in']}}</td>
+                    <td>{{i['who']}}</td>
+                    </tr>
+                </tbody>
+                {%endfor%}
+                </li>
         </table>
     </div>
 </div>
 <!-- /.container-fluid -->
-
-<!-- Second container -->
-
-<div class="row">
-    <div class="col-12 col-md-12 text-left">
-        <span class="h1 text-gray-800">發公告系統</span>
-    </div>
-</div>
-
-<div class="row mt-4 mb-4">
-    <div class="col-6 col-md-3 text-right">
-        <span class="h4 text-gray-800 w-100">發布日期：</span>
-    </div>
-
-    <div class="col-6 col-md-2 text-left">
-        <input type="text" class="text-center" name="applyDate" id="applyDate" disabled>
-
-        <script>
-            function showDate() {
-                var NowDate = new Date();
-                var yy = NowDate.getFullYear();
-                var mm = NowDate.getMonth() + 1;
-                var dd = NowDate.getDate();
-                document.getElementById('applyDate').value = yy + "/" + mm + "/" + dd;
-            }
-        </script>
-    </div>
-
-    <div class="col-6 col-md-3 text-right">
-        <span class="h4 text-gray-800 w-100">發布單位：</span>
-    </div>
-
-    <div class="col-6 col-md-2 text-left">
-        <select class="form-select form-select-lg btn btn-outline-info w-100 text-center"
-            name="department" id="department" aria-label=".form-select-lg example">
-            <option selected>請選擇</option>
-            <option value="1">總管理處</option>
-            <option value="2">監察室</option>
-            <option value="3">秘書室</option>
-            <option value="4">財務部</option>
-            <option value="5">出納科</option>
-            <option value="6">會計科</option>
-            <option value="7">人資部</option>
-            <option value="8">實習組</option>
-            <option value="9">資訊部</option>
-            <option value="10">研發科</option>
-            <option value="11">技術科</option>
-            <option value="12">研發一組</option>
-            <option value="13">技術一組</option>
-        </select>
-    </div>
-</div>
-
-<div class="row mb-4">
-    <div class="col-6 col-md-3 text-right">
-        <span class="h4 text-gray-800 w-100">主旨：</span>
-    </div>
-
-    <div class="col-6 col-md-2 text-left">
-        <input type="text" name="main_idea" id="main_idea" placeholder="請輸入主旨">
-    </div>
-
-    <div class="col-6 col-md-3 text-right">
-        <span class="h4 text-gray-800 w-100">內文：</span>
-    </div>
-
-    <div class="col-6 col-md-2 text-left">
-        <input type="text" size="20" name="summary" id="summary" placeholder="請輸入內文">
-    </div>
-</div>
-
-<div class="row mb-4">
-    <div class="col-6 col-md-3 text-right">
-        <span class="h4 text-gray-800 w-100">發布人：</span>
-    </div>
-
-    <div class="col-6 col-md-2 text-left">
-        <select class="form-select form-select-lg btn btn-outline-info w-100 text-center"
-            name="applicant" id="applicant" aria-label=".form-select-lg example">
-            <option selected>請選擇</option>
-            <option value="1">劉建佑</option>
-            <option value="2">侯正成</option>
-            <option value="3">陳星維</option>
-            <option value="4">劉軒志</option>
-            <option value="5">林彥合</option>
-            <option value="6">李知恩</option>
-        </select>
-    </div>
-</div>
-<!-- end Second container -->
-
-<!-- Third container -->
-<div class="row-50% text-center">
-    <div class=" mx-auto table-responsive">
-        <table class="table text-nowrap">
-            <tbody class="h4">
-                <tr>
-                    <td id="公告分類" class="text-left">公告分類：紙類</td>
-                    <td id="時間" class="text-right">發布時間：2022/4/17 21:24:27</td>
-                </tr>
-                <tr>
-                    <td id="公告主旨" class="text-left" colspan="2">公告主旨：幫正成加薪</td>
-                </tr>
-                <tr>
-                    <td id="內文標誌" class="text-left" colspan="2">內文：</td>
-                </tr>
-                <tr>
-                    <td id="內文內容" class="text-left border-0" height="300px" colspan="2">快阿快阿正成要窮死了</td>
-                </tr>
-                <tr>
-                    <td id="附件連結" class="text-left" colspan="2"><a href="#">附件連結：網址</a></td>
-                </tr>
-                <tr>
-                    <td id="發布單位" class="text-left">發布單位：資訊部</td>
-                    <td id="發布人" class="text-right">發布人：侯正成</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-<!-- end Third container -->
 
 {% endblock %}
