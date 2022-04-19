@@ -137,7 +137,7 @@ def announcement_imput(a,b,c,d,e,f):
     'category':'公告',
     'announcement_category':e,
     'filename':f,
-    'search_id':'F'+id
+    'search_id':'F'+str(id)
     }
 
     announcement_result = announcement.insert_one(post)

@@ -197,7 +197,6 @@
                                     <th>發布日期</th>
                                     <th>發布單位</th>
                                     <th>主旨</th>
-                                    <th>摘要</th>
                                     <th>發布人</th>
                                 </tr>
                             </thead>
@@ -207,8 +206,7 @@
                                         <tr>
                                         <td class="text-primary">{{x['code_date']}}</td>
                                         <td>{{x['unit']}}</td>
-                                        <td><a href=/announcement/{{x['subject']}}">{{x['subject']}}</a></td>
-                                        <td>{{x['text_in']}}</td>
+                                        <td><a href="/announcement/{{x['search_id']}}"><p style='width: 200px;'>{{x['subject']}}</p></a></td>
                                         <td>{{x['who']}}</td>
                                         </tr>
                                     </tbody>

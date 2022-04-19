@@ -51,7 +51,7 @@
 
 html {
     font-family: sans-serif;
-    line-height: 1.15;
+    line-height: 1.5;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent
 }
@@ -101,8 +101,11 @@ h6 {
 }
 
 p {
-    margin-top: 0;
-    margin-bottom: 1rem
+    margin: auto;
+    width: 300px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 abbr[data-original-title],
@@ -11653,4 +11656,10 @@ footer.sticky-footer .copyright {
 
 body.sidebar-toggled footer.sticky-footer {
     width: 100%
+}
+
+.single-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
