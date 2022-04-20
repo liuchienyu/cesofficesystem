@@ -167,7 +167,7 @@
                 </div>
                 <div class="mt-4 text-center small">
                     <span class="mr-2">
-                        <i class="fas fa-circle text-primary"></i> 緊急
+                        <i class="fas fa-circle text-danger"></i> 緊急
                     </span>
                     <span class="mr-2">
                         <i class="fas fa-circle text-success"></i> 普通
@@ -195,9 +195,9 @@
                             <thead>
                                 <tr>
                                     <th>發布日期</th>
-                                    <th>發布單位</th>
+                                    <th>公告類別</th>
                                     <th>主旨</th>
-                                    <th>發布人</th>
+                                    <th>發布單位</th>
                                 </tr>
                             </thead>
                             <li class='list-unstyled justify-content-between d-flex h6'>
@@ -205,9 +205,9 @@
                                     <tbody id="myTable2">
                                         <tr>
                                         <td class="text-primary">{{x['code_date']}}</td>
-                                        <td>{{x['unit']}}</td>
+                                        <td>{{x['announcement_category']}}</td>
                                         <td><a href="/announcement/{{x['search_id']}}"><p style='width: 200px;'>{{x['subject']}}</p></a></td>
-                                        <td>{{x['who']}}</td>
+                                        <td>{{x['unit']}}</td>
                                         </tr>
                                     </tbody>
                                 {%endfor%}
@@ -261,87 +261,73 @@
                 </div>
             </div>
         </div>
-
-        <!-- Color System (delete) -->
-        <div class="row">
-        </div>
-
     </div>
+</div>
 
-    <div class="col-lg-6 mb-4">
+<div class="row">
+    <div class="col-6 mb-4">
 
         <!-- Illustrations -->
-        <div class="card shadow mb-4">
+        <div class="card shadow">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">財務消息</h6>
             </div>
             <div class="card-body">
-                <div class="card-body">
-                    <div class="chart-area">
-                        <div class=" mx-auto table-responsive-sm row text-center ">
-                            <table class="table table-hover text-nowrap ">
-                                <thead>
+                <div class="chart-area">
+                    <div class=" mx-auto table-responsive-sm row text-center ">
+                        <table class="table table-hover text-nowrap ">
+                            <thead>
                                     <tr>
                                         <th scope="col">發布日期</th>
-                                        <th scope="col">發布單位</th>
                                         <th scope="col">主旨</th>
-                                        <th scope="col">摘要</th>
                                         <th scope="col">發布人</th>
                                     </tr>
                                 </thead>
                                 <li class='list-unstyled justify-content-between d-flex h6'>
-                                {%for i in code_results%}
-                                    <tbody id="myTable">
+                                    {%for y in code_results3%}
+                                    <tbody id="myTable3">
                                         <tr>
-                                        <td class="text-primary">{{i['code_date']}}</td>
-                                        <td>{{i['who_make']}}</td>
-                                        <td>{{i['code_number']}}</td>
-                                        <td>{{i['code_speed']}}</td>
-                                        <td>{{i['class_level']}}</td>
-                                        <td>{{i['appendix']}}</td>
+                                        <td class="text-primary">{{y['code_date']}}</td>                                        
+                                        <td><a href="/announcement/{{y['search_id']}}"><p style='width: 100px;'>{{y['subject']}}</p></a></td>
+                                        <td>{{y['who']}}</td>
                                         </tr>
                                     </tbody>
-                                {%endfor%}
-                                </li>
+                                    {%endfor%}
+                                    </li>
                             </table>
                         </div>
                     </div>
                 </div>
-                </div>
             </div>
         </div>
-        <div class="col-lg-6 mb-4">
-        <!-- Approach -->
-        <div class="card shadow mb-4">
+    </div>
+    <div class="col-md-6 mb-4">
+
+        <!-- Illustrations -->
+        <div class="card shadow">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">人資消息</h6>
             </div>
             <div class="card-body">
-                <div class="card-body">
-                    <div class="chart-area">
-                        <div class=" mx-auto table-responsive-sm row text-center ">
-                            <table class="table table-hover text-nowrap ">
-                                <thead>
+                <div class="chart-area">
+                    <div class=" mx-auto table-responsive-sm row text-center ">
+                        <table class="table table-hover text-nowrap ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">發布日期</th>
+                                    <th scope="col">主旨</th>
+                                    <th scope="col">發布人</th>
+                                </tr>
+                            </thead>
+                            <li class='list-unstyled justify-content-between d-flex h6'>
+                                {%for z in code_results4%}
+                                <tbody id="myTable4">
                                     <tr>
-                                        <th scope="col">發布日期</th>
-                                        <th scope="col">發布單位</th>
-                                        <th scope="col">主旨</th>
-                                        <th scope="col">摘要</th>
-                                        <th scope="col">發布人</th>
+                                    <td class="text-primary">{{z['code_date']}}</td>                                        
+                                    <td><a href="/announcement/{{z['search_id']}}"><p style='width: 100px;'>{{z['subject']}}</p></a></td>
+                                    <td>{{z['who']}}</td>
                                     </tr>
-                                </thead>
-                                <li class='list-unstyled justify-content-between d-flex h6'>
-                                {%for i in code_results%}
-                                    <tbody id="myTable">
-                                        <tr>
-                                        <td class="text-primary">{{i['code_date']}}</td>
-                                        <td>{{i['who_make']}}</td>
-                                        <td>{{i['code_number']}}</td>
-                                        <td>{{i['code_speed']}}</td>
-                                        <td>{{i['class_level']}}</td>
-                                        <td>{{i['appendix']}}</td>
-                                        </tr>
-                                    </tbody>
+                                </tbody>
                                 {%endfor%}
                                 </li>
                             </table>
@@ -350,10 +336,7 @@
                 </div>
             </div>
         </div>
-
     </div>
-</div>
-
 </div>
 <!-- /.container-fluid -->
 <!-- Scroll to Top Button-->

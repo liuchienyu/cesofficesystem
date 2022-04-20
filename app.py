@@ -107,11 +107,21 @@ def home():
     count_results2 = base_info2.count_documents({'category':'公告'})
     code_results = base_info.find({'category':'文號申請'})
     code_results2 = base_info2.find({'category':'公告'})
+    code_results3 = base_info2.find({'announcement_category':'財務公告'})
+    code_results4 = base_info2.find({'announcement_category':'人資公告'})
+
     code_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
     code_results2.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
+    code_results3.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
+    code_results4.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
+
+
     code_results.limit(5)#限制數量
     code_results2.limit(5)#限制數量
-    return render_template("home.html", count_results= count_results,count_results2= count_results2,code_results = code_results,code_results2 = code_results2)
+    code_results3.limit(5)#限制數量
+    code_results4.limit(5)#限制數量
+
+    return render_template("home.html", count_results= count_results,count_results2= count_results2,code_results = code_results,code_results2 = code_results2,code_results3 = code_results3,code_results4 = code_results4)
 
 @app.route("/activity_record")
 @login_required
