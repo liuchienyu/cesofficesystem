@@ -396,5 +396,28 @@ def announcement_in():
         return render_template("./base/alert_base.html",alert_base=alert_base,alert_base2=alert_base2,alert_base_herf = alert_base_herf,alert_base_herf2=alert_base_herf2)
     return render_template("./announcement/announcement_in.html")  
 
+@app.route("/team_law")
+@login_required
+def team_law():
+    db = client.systemdata
+    base_info = db.team_law
+    code_results = base_info.find({'category':'法令解釋'})
+    code_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
+    code_results.limit(10)#限制數量
+    return render_template("./general_management_office/team_law.html",code_results=code_results)
+#法令解釋-每個
+@app.route('/team_law/<search_id>')
+@login_required
+def team_law2(search_id):
+    if search_id == 'L1':
+        db = client.systemdata
+        base_info = db.team_law
+        code_results = base_info.find({'search_id':search_id})
+        return render_template('./general_management_office/lawpaper/L1.html',code_results=code_results)
+        
+@app.route("/sign_off")
+@login_required
+def sign_off():
+    return render_template("./secretary_room/sign_off.html")
 if __name__ == "__main__":
     app.run(debug=True)
