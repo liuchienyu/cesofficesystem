@@ -419,5 +419,23 @@ def team_law2(search_id):
 @login_required
 def sign_off():
     return render_template("./secretary_room/sign_off.html")
+
+@app.route("/meeting_minutes")
+@login_required
+def meeting_minutes():
+    db = client.systemdata
+    base_info = db.meeting_minutes
+    code_results = base_info.find({'category':'會議記錄'})
+    code_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
+    code_results.limit(10)#限制數量
+    return render_template("./secretary_room/meeting_minutes.html",code_results=code_results)
+#會議記錄-每個
+@app.route('/meeting_minutes/<search_id>')
+@login_required
+def meeting_minutes2(search_id):
+        db = client.systemdata
+        base_info = db.team_law
+        code_results = base_info.find({'search_id':search_id})
+        return render_template('./secretary_room/meeting_minutes_each.html',code_results=code_results)
 if __name__ == "__main__":
     app.run(debug=True)
