@@ -410,10 +410,11 @@ def team_law():
 @login_required
 def team_law2(search_id):
     if search_id == 'L1':
-        db = client.systemdata
-        base_info = db.team_law
-        code_results = base_info.find({'search_id':search_id})
-        return render_template('./general_management_office/lawpaper/L1.html',code_results=code_results)
+        return render_template('./general_management_office/lawpaper/L1.html')
+    elif search_id == 'O1':
+        return render_template('./general_management_office/lawpaper/O1.html')
+    elif search_id == 'O2':
+        return render_template('./general_management_office/lawpaper/O2.html')
         
 @app.route("/sign_off")
 @login_required
