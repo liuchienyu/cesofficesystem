@@ -198,10 +198,10 @@ def ClockIn():
         time_base = '現在是上班時間，請記得打上班卡'
         if '21:45:00'>= time_1 >= '20:00:00':
             time_base2= '值班主管、早班成員'
-            return render_template("ClockIn.html",time_base=time_base,time_base2=time_base2)
+            return render_template("./HR_department/ClockIn.html",time_base=time_base,time_base2=time_base2)
         else:
             time_base2= '值班主管、晚班成員'
-            return render_template("ClockIn.html",time_base=time_base,time_base2=time_base2)
+            return render_template("./HR_department/ClockIn.html",time_base=time_base,time_base2=time_base2)
     else:
         time_base = '現在是下班時間，請記得打下班卡'
         time_base2 = '無'
