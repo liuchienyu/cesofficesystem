@@ -438,5 +438,7 @@ def meeting_minutes2(search_id):
         base_info = db.team_law
         code_results = base_info.find({'search_id':search_id})
         return render_template('./secretary_room/meeting_minutes_each.html',code_results=code_results)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
