@@ -245,7 +245,7 @@ def finance_check():
 @app.route("/Leave")
 @login_required
 def Leave():
-    return render_template("./HR_department/Leave.html")
+    return render_template("./HR_department/leave_form.html")
 
 
 @app.route("/overtime")

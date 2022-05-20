@@ -1,0 +1,99 @@
+{% extends "./base/base.html" %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-1 col-lg-2"></div>
+        <div class="col-12 col-md-10 col-lg-8">
+            <table class="table table-responsive border-2">
+                <tr class="text-center mx-auto">
+                    <td style="width: 10%;">
+                        申請人
+                    </td>
+                    <td style="width: 40%;">
+                        <input type="text" class="w-100">
+                    </td>
+                    <td style="width: 15%;">
+                        申請單位
+                    </td>
+                    <td style="width: 35%;">
+                        <input type="text" class="w-100">
+                    </td>
+                </tr>
+                <tr class="text-center mx-auto">
+                    <td style="width: 15%;">
+                        申請日期
+                    </td>
+                    <td colspan="3" style="width: 85%;">
+                        <input type="text" class="w-100">
+                    </td>
+                </tr>
+                <tr class="text-center mx-auto">
+                    <td style="width: 10%;">
+                        代理人
+                    </td>
+                    <td style="width: 40%;">
+                        <input type="text" class="w-100">
+                    </td>
+                    <td style="width: 15%;">
+                        代理人單位
+                    </td>
+                    <td style="width: 35%;">
+                        <input type="text" class="w-100">
+                    </td>
+                </tr>
+                <tr class="text-center mx-auto">
+                    <td style="width: 15%;">
+                        請假事由
+                    </td>
+                    <td colspan="3" style="width: 85%;">
+                        <input type="text" class="w-100">
+                    </td>
+                </tr>
+                <tr class="text-center mx-auto">
+                    <td style="width: 15%;">
+                        請假類型
+                    </td>
+                    <td style="width: 35%;">
+                        <!-- 勾勾盒子 -->
+                    </td>
+                    <td style="width: 15%;">
+                        請假時數
+                    </td>
+                    <td style="width: 35%;">
+                        <input type="text" class="w-100" placeholder="請輸入小時">
+                    </td>
+                </tr>
+                <tr class="text-center mx-auto">
+                    <td style="width: 15%;">
+                        開始日期
+                    </td>
+                    <td style="width: 35%;">
+                        <input type="text" class="w-100" placeholder="請輸入年月日時分">
+                    </td>
+                    <td style="width: 15%;">
+                        結束日期
+                    </td>
+                    <td style="width: 35%;">
+                        <input type="text" class="w-100" placeholder="請輸入年月日時分">
+                    </td>
+                </tr>
+                <tr class="text-center mx-auto">
+                    <td style="width: 15%;">
+                        備註
+                    </td>
+                    <td style="width: 35%;">
+                        <input type="text" class="w-100" placeholder="請輸入年月日時分">
+                    </td>
+                    <td style="width: 15%;">
+                        
+                    </td>
+                    <td style="width: 35%;">
+                        
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-1 col-lg-2"></div>
+    </div>
+</div>
+{% endblock %}
