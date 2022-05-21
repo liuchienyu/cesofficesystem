@@ -1,0 +1,47 @@
+{% extends "./base/base.html" %}
+{% block body %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">團隊規定、解釋及命令一覽</h1>
+    <a href="download" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-download fa-sm text-white-50"></i> 下載規定</a>
+</div>
+
+<!-- Tales -->
+<div class="row-50% text-center">
+    <div class=" mx-auto table-responsive">
+        <table class="table table-hover text-nowrap">
+            <thead>
+                <tr>
+                    <th>發布日期</th>
+                    <th>規定類別</th>
+                    <th>規定名稱</th>
+                    <th>發布單位</th>
+                </tr>
+            </thead>
+            <li class='list-unstyled justify-content-between d-flex h6'>
+                {%for i in code_results%}
+                <tbody id="myTable">
+                    <tr>
+                    <td class="text-primary">{{i['code_date']}}</td>
+                    <td>{{i['law_category']}}</td>
+                    <td><a href="team_law/{{i['search_id']}}" target=_blank><p>{{i['subject']}}</p></a></td>
+                    <td>{{i['unit']}}</td>
+                    </tr>
+                </tbody>
+                {%endfor%}
+                </li>
+        </table>
+    </div>
+</div>
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+<i class="fas fa-angle-up"></i>
+</a>
+
+
+{% endblock %}
