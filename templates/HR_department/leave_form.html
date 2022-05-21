@@ -1,22 +1,22 @@
 {% extends "./base/base.html" %}
 {% block body %}
 <div class="container-fluid">
-    <div class="row">
+    <form method="POST" action="" class="row g-3 mb-4">
         <div class="col-md-1 col-lg-2"></div>
-        <div class="col-12 col-md-10 col-lg-8">
-            <table class="table table-responsive border-2">
+        <div class="col-12 col-md-10 col-lg-8 table-responsive">
+            <table class="table table-bordered align-middle mt-3">
                 <tr class="text-center mx-auto">
-                    <td style="width: 10%;">
+                    <td style="width: 15%;">
                         申請人
                     </td>
-                    <td style="width: 40%;">
-                        <input type="text" class="w-100">
+                    <td style="width: 35%;">
+                        <input type="text" name="applicant" id="applicant" class="w-100">
                     </td>
                     <td style="width: 15%;">
                         申請單位
                     </td>
                     <td style="width: 35%;">
-                        <input type="text" class="w-100">
+                        <input type="text" name="department" id="department" class="w-100">
                     </td>
                 </tr>
                 <tr class="text-center mx-auto">
@@ -24,21 +24,21 @@
                         申請日期
                     </td>
                     <td colspan="3" style="width: 85%;">
-                        <input type="text" class="w-100">
+                        <input type="text" name="applyDate" id="applyDate" class="w-100" placeholder="請輸入年月日">
                     </td>
                 </tr>
                 <tr class="text-center mx-auto">
-                    <td style="width: 10%;">
+                    <td style="width: 15%;">
                         代理人
                     </td>
-                    <td style="width: 40%;">
-                        <input type="text" class="w-100">
+                    <td style="width: 35%;">
+                        <input type="text" name="agent" id="agent" class="w-100">
                     </td>
                     <td style="width: 15%;">
                         代理人單位
                     </td>
                     <td style="width: 35%;">
-                        <input type="text" class="w-100">
+                        <input type="text" name="agentDepartment" class="w-100">
                     </td>
                 </tr>
                 <tr class="text-center mx-auto">
@@ -46,7 +46,7 @@
                         請假事由
                     </td>
                     <td colspan="3" style="width: 85%;">
-                        <input type="text" class="w-100">
+                        <textarea name="reason" id="reason" class="w-100"></textarea>
                     </td>
                 </tr>
                 <tr class="text-center mx-auto">
@@ -54,13 +54,90 @@
                         請假類型
                     </td>
                     <td style="width: 35%;">
-                        <!-- 勾勾盒子 -->
+                        <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" name="leave" id="leave" aria-label=".form-select-lg example">
+                            <option selected>請選擇</option>
+                            <option value="特休假">特休假</option>
+                            <option value="補休假">補休假</option>
+                            <option value="公假">公假</option>
+                            <option value="事假">事假</option>
+                            <option value="病假">病假</option>
+                            <option value="喪假">喪假</option>
+                            <option value="婚假">婚假</option>
+                            <option value="產假">產假</option>
+                            <option value="陪產假">陪產假</option>
+                            <option value="生理假">生理假</option>
+                            <option value="其他">其他（於備註註明）</option>
+                        </select>
                     </td>
                     <td style="width: 15%;">
                         請假時數
                     </td>
                     <td style="width: 35%;">
-                        <input type="text" class="w-100" placeholder="請輸入小時">
+                        <form id='myform' method='POST' action='#'>
+                            <input type='button' value='-' class='qtyminus' field='quantity' />
+                            <input type='text' name='quantity' value='' class='qty' placeholder="請輸入小時" />
+                            <input type='button' value='+' class='qtyplus' field='quantity' />
+                        </form>
+                        <style>
+                            .qty {
+                                width: 50%;
+                                height: 35px;
+                                text-align: center;
+                                
+                            }
+
+                            input.qtyplus {
+                                width: 20%;
+                                height: 35px;
+                                border: 1px solid #aaa;
+                                background: #f8f8f8;
+                            }
+
+                            input.qtyminus {
+                                width: 20%;
+                                height: 35px;
+                                border: 1px solid #aaa;
+                                background: #f8f8f8;
+                            }
+                        </style>
+                        <script>
+                            $(function () {
+                                // This button will increment the value
+                                $('.qtyplus').click(function (e) {
+                                    // Stop acting like a button
+                                    e.preventDefault();
+                                    // Get the field name
+                                    fieldName = $(this).attr('field');
+                                    // Get its current value
+                                    var currentVal = parseFloat($('input[name=' + fieldName + ']').val());
+                                    // If is not undefined
+                                    if (!isNaN(currentVal)) {
+                                        // Increment
+                                        $('input[name=' + fieldName + ']').val(currentVal + 0.5);
+                                    } else {
+                                        // Otherwise put a 0 there
+                                        $('input[name=' + fieldName + ']').val(0);
+                                    }
+                                });
+                                // This button will decrement the value till 0
+                                $(".qtyminus").click(function (e) {
+                                    // Stop acting like a button
+                                    e.preventDefault();
+                                    // Get the field name
+                                    fieldName = $(this).attr('field');
+                                    // Get its current value
+                                    var currentVal = parseFloat($('input[name=' + fieldName + ']').val());
+                                    // If it isn't undefined or its greater than 0
+                                    if (!isNaN(currentVal) && currentVal > 0) {
+                                        // Decrement one
+                                        $('input[name=' + fieldName + ']').val(currentVal - 0.5);
+                                    } else {
+                                        // Otherwise put a 0 there
+                                        $('input[name=' + fieldName + ']').val(0);
+                                    }
+                                });
+                            });
+                        </script>
                     </td>
                 </tr>
                 <tr class="text-center mx-auto">
@@ -85,15 +162,67 @@
                         <input type="text" class="w-100" placeholder="請輸入年月日時分">
                     </td>
                     <td style="width: 15%;">
-                        
+
                     </td>
                     <td style="width: 35%;">
-                        
+
                     </td>
                 </tr>
             </table>
+
+            <table class="table table-bordered border-dark mt-5 align-middle">
+                <tbody>
+                <tr class="text-center mx-auto">
+                    <th>
+                        申請人
+                    </th>
+                    <th>
+                        代理人
+                    </th>
+                    <th>
+                        單位主管
+                    </th>
+                </tr>
+                <tr class="text-center mx-auto" height="100px">
+                    <td style="vertical-align: middle;">
+                        
+                    </td>
+                    <td style="vertical-align: middle;">
+                        
+                    </td>
+                    <td style="vertical-align: middle;">
+                        
+                    </td>
+                </tr>
+                <tr class="text-center mx-auto">
+                    <th>
+                        人資部
+                    </th>
+                    <th>
+                        秘書室
+                    </th>
+                    <th>
+                        總管理處
+                    </th>
+                </tr>
+                <tr class="text-center mx-auto" height="100px">
+                    <td style="vertical-align: middle;">
+                        
+                    </td>
+                    <td style="vertical-align: middle;">
+                        
+                    </td>
+                    <td style="vertical-align: middle;">
+                        
+                    </td>
+                </tr>
+            </tbody>
+            </table>
+            <div class="text-right">
+                <button type="#" class="btn btn-primary btn-center">提交</button>
+            </div>            
         </div>
         <div class="col-md-1 col-lg-2"></div>
-    </div>
+    </form>
 </div>
 {% endblock %}
