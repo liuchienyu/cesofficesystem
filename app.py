@@ -139,12 +139,18 @@ def activity_record():
 @app.route("/profile")
 @login_required
 def profile():
-    return render_template('./profile/profile.html')
+    db = client.systemdata
+    base_info = db.base_info
+    count_results = base_info.find({'id_number':session['user_id']})
+    return render_template('./profile/profile.html',count_results= count_results)
 
 @app.route("/more")
 @login_required
 def more():
-    return render_template("./profile/more_profile.html")
+    db = client.systemdata
+    base_info = db.base_info
+    count_results = base_info.find({'id_number':session['user_id']})
+    return render_template("./profile/more_profile.html",count_results= count_results)
 
 
 @app.route("/download")

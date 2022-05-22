@@ -16,23 +16,24 @@
                 <a class="dropdown-item" href="/profile" data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> 
                 </a>
-            </div>   
-            <div class="pic">
-                <img src="static/images/{{g.user.username}}.png" alt="">
             </div>
-            <div class="name">{{g.user.id_name}}</div>
-            <div class="desc">測試員</div>
+        {%for i in count_results%}   
+            <div class="pic">
+                <img src="static/images/{{i['id_number']}}.png" alt="">
+            </div>
+            <div class="name">{{i['id_name']}}</div>
+            <div class="desc">{{i['job_title']}}</div>
             <div class="sm">
             </div>
         <div class="card-footer">
             <div class="numbers">
                 <div class="item">
-                    <span>{{g.user.username}}</span>
+                    <span>{{i['id_number']}}</span>
                     成員編號
                 </div>
                 <div class="border"></div>
                 <div class="item">
-                    <span>總管理處</span>
+                    <span>{{i['unit']}}</span>
                     所屬部門
                 </div>
                 <div class="border"></div>
@@ -44,50 +45,51 @@
             <div class="card-footer">
                 <div class="numbers">
                     <div class="item">
-                        <span>{{g.user.id_name}}</span>
+                        <span>{{i['id_name']}}</span>
                         姓名
                     </div>
                     <div class="border"></div>
                     <div class="item">
-                        <span>{{g.user.id_sex}}</span>
+                        <span>{{i['id_sex']}}</span>
                        性別
                     </div>
                     <div class="border"></div>
                     <div class="item">
-                        <span>{{g.user.id_birth}}</span>
+                        <span>{{i['id_birth']}}</span>
                     生日
                     </div>
                 </div>
             </div>
                 <div class="numbers">
                     <div class="item-s">
-                        <span>{{g.user.id_email}}</span>
+                        <span>{{i['id_email']}}</span>
                         電子郵件
                     </div>
                     <div class="border"></div>
                     <div class="item">
-                        <span>{{g.user.id_phone}}</span>
+                        <span>{{i['id_phone']}}</span>
                        聯絡電話
                     </div>
                 </div>
             <div class="card-footer">
                 <div class="numbers">
                     <div class="item">
-                        <span>2</span>
+                        <span>{{i['hierarchie']}}</span>
                         層級代號
                     </div>
                     <div class="border"></div>
                     <div class="item">
-                        <span>測試員</span>
+                        <span>{{i['job_title']}}</span>
                        職稱
                     </div>
                     <div class="border"></div>
                     <div class="item">
-                        <span>4</span>
+                        <span>{{i['job_level']}}</span>
                     職等
                     </div>
                 </div>
             </div>
+        {%endfor%}
     </div>
 {% block body %}
 {% endblock %}

@@ -17,11 +17,13 @@
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> 
                 </a>
             </div>   
+        {%for i in count_results%}
             <div class="pic">
-                <img src="static/images/{{g.user.username}}.png" alt="">
+                <img src="static/images/{{i['id_number']}}.png" alt="">
             </div>
-            <div class="name">{{g.user.id_name}}</div>
-            <div class="desc">測試員</div>
+
+            <div class="name">{{i['id_name']}}</div>
+            <div class="desc">{{i['job_title']}}</div>
             <div class="sm">
                 <a href="#" class="fab fa-facebook-f"></a>
                 <a href="#" class="fab fa-twitter"></a>
@@ -30,16 +32,17 @@
             </div>
             
             <a href="more" class="contract-btn">更多資料</a>
+        
         </div>
         <div class="card-footer">
             <div class="numbers">
                 <div class="item">
-                    <span>{{g.user.username}}</span>
+                    <span>{{i['id_number']}}</span>
                     成員編號
                 </div>
                 <div class="border"></div>
                 <div class="item">
-                    <span>總管理處</span>
+                    <span>{{i['unit']}}</span>
                     所屬部門
                 </div>
                 <div class="border"></div>
@@ -49,6 +52,7 @@
                 </div>
             </div>
         </div>
+        {%endfor%}
     </div>
     <div class="position-relative">
         <div class="position-absolute top-0 end-0">
