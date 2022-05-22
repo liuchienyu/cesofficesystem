@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人資料</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="static/css/profile.css">
+</head>
+
+<body>
+    <div class="profile-card"> 
+        <div class="card-header">
+            <div class="goback">
+                <a class="dropdown-item" href="/home" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> 
+                </a>
+            </div>   
+            <div class="pic">
+                <img src="static/images/{{g.user.username}}.png" alt="">
+            </div>
+            <div class="name">{{g.user.id_name}}</div>
+            <div class="desc">測試員</div>
+            <div class="sm">
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-github"></a>
+                <a href="#" class="fab fa-youtube"></a>
+            </div>
+            
+            <a href="more" class="contract-btn">更多資料</a>
+        </div>
+        <div class="card-footer">
+            <div class="numbers">
+                <div class="item">
+                    <span>{{g.user.username}}</span>
+                    成員編號
+                </div>
+                <div class="border"></div>
+                <div class="item">
+                    <span>總管理處</span>
+                    所屬部門
+                </div>
+                <div class="border"></div>
+                <div class="item">
+                    <span>120K</span>
+                    累計服務時數
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="position-relative">
+        <div class="position-absolute top-0 end-0">
+           
+        </div>
+    </div>
+{% block body %}
+{% endblock %}
+</body>
+
+</html>

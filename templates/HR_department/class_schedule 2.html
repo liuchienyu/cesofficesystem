@@ -1,0 +1,42 @@
+{% extends "./base/base.html" %}
+{% block body %}
+<!-- Page Heading -->
+<h1 class="mb-5 text-gray-800">值班班表</h1>
+
+<!-- Content Row -->
+<div class="row-50% text-center">
+    <div class=" mx-auto table-responsive">
+        <table class="table table-hover text-nowrap">
+            <thead>
+                <tr>
+                    <th scope="col">成員</th>
+                    <th scope="col">日</th>
+                    <th scope="col">一</th>
+                    <th scope="col">二</th>
+                    <th scope="col">三</th>
+                    <th scope="col">四</th>
+                    <th scope="col">五</th>
+                    <th scope="col">六</th>
+                </tr>
+            </thead>
+
+                    <li class='list-unstyled justify-content-between d-flex h6'>
+                        {%for i in code_results%}
+                            <tbody id="myTable">
+                                <tr>
+                                <td>{{i['id_name']}}</td>
+                                <td>17<br>劉建佑</td>
+                                <td>17<br>劉建佑</td>
+                                <td>17<br>劉建佑</td>
+                                <td>17<br>劉建佑</td>
+                                <td>17<br>劉建佑</td>
+                                <td>17<br>劉建佑</td>
+                                <td>17<br>劉建佑</td>
+                                </tr>
+                            </tbody>
+                            {%endfor%}
+                    </li>
+        </table>
+    </div>
+</div>
+{% endblock %}

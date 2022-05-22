@@ -1,0 +1,11 @@
+flask
+flask_login
+datetime
+django
+pdfkit
+werkzeug
+flask_sqlalchemy
+sqlalchemy
+sqlalchemy.orm
+pymongo[srv]==3.12.0
+python-dotenv
