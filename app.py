@@ -445,6 +445,43 @@ def meeting_minutes2(search_id):
         code_results = base_info.find({'search_id':search_id})
         return render_template('./secretary_room/meeting_minutes_each.html',code_results=code_results)
 
+@app.route("/law_system")
+@login_required
+def law_system():
+    db = client.systemdata
+    base_info = db.announcement
+    code_results = base_info.find({'category':'公告'})
+    code_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
+    code_results.limit(10)#限制數量
+    return render_template("./general_management_office/law_system/law_system.html",code_results=code_results)
+
+@app.route("/progress")
+@login_required
+def progress():
+    db = client.systemdata
+    base_info = db.announcement
+    code_results = base_info.find({'category':'公告'})
+    code_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
+    code_results.limit(10)#限制數量
+    return render_template("./general_management_office/law_system/progress.html",code_results=code_results)
+
+@app.route("/law_system_in", methods=['GET', 'POST'])
+@login_required
+def law_system_in():
+    if request.method == 'POST':
+        a1 = request.values['department']  
+        a2 = request.values['applicant']
+        a3=  request.form['subject']
+        a4= request.form['text_in']
+        a5 = request.values['announcement_category']
+        a6 = request.values['filename']
+        announcement_imput(a1, a2,a3,a4,a5,a6)
+        alert_base = '公告發布完成'
+        alert_base2 = '點此上傳公告附件'
+        alert_base_herf = 'announcement'
+        alert_base_herf2 = 'upload'
+        return render_template("./base/alert_base.html",alert_base=alert_base,alert_base2=alert_base2,alert_base_herf = alert_base_herf,alert_base_herf2=alert_base_herf2)
+    return render_template("./announcement/announcement_in.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
