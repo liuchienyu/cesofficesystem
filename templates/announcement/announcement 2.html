@@ -1,0 +1,43 @@
+{% extends "./base/base.html" %}
+{% block body %}
+                
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">團隊最新公告</h1>
+    <a href="announcement_in" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
+            class="fas fa-download fa-sm text-white-50"></i> 發布公告</a>
+</div>
+
+<!-- Tales -->
+<div class="row-50% text-center">
+    <div class=" mx-auto table-responsive">
+        <table class="table table-hover text-nowrap">
+            <thead>
+                <tr>
+                    <td class="h2" colspan='5' id="title">公告</td>
+                </tr>
+                <tr>
+                    <th>發布日期</th>
+                    <th>發布單位</th>
+                    <th>公告類別</th>
+                    <th>主旨</th>
+                </tr>
+            </thead>
+            <li class='list-unstyled justify-content-between d-flex h6'>
+                {%for i in code_results%}
+                <tbody id="myTable">
+                    <tr>
+                    <td class="text-primary">{{i['code_date']}}</td>
+                    <td>{{i['unit']}}</td>
+                    <td>{{i['announcement_category']}}</td>
+                    <td><a href="announcement/{{i['search_id']}}"><p>{{i['subject']}}</p></a></td>
+                    </tr>
+                </tbody>
+                {%endfor%}
+                </li>
+        </table>
+    </div>
+</div>
+<!-- /.container-fluid -->
+
+{% endblock %}

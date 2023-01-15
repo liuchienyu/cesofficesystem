@@ -21,20 +21,20 @@
                     <script language="JavaScript">
                         function ShowTime() {
                             var NowDate = new Date();
-                            var yy = NowDate.getFullYear();
+                            var yy = NowDate.getFullYear() - 1911;
                             var mm = NowDate.getMonth() + 1;
                             var dd = NowDate.getDate();
                             var h = NowDate.getHours();
                             var m = NowDate.getMinutes();
                             var s = NowDate.getSeconds();
                             if (mm < 10 && dd < 10) {
-                                document.getElementById("Date").innerHTML = yy + "年0" + mm + "月0" + dd + "日";
+                                document.getElementById("Date").innerHTML ="民國" + yy + "年0" + mm + "月0" + dd + "日";
                             } else if (mm < 10 && dd >= 10) {
-                                document.getElementById("Date").innerHTML = yy + "年0" + mm + "月" + dd + "日";
+                                document.getElementById("Date").innerHTML ="民國" + yy + "年0" + mm + "月" + dd + "日";
                             } else if (mm >= 10 && dd < 10) {
-                                document.getElementById("Date").innerHTML = yy + "年" + mm + "月0" + dd + "日";
+                                document.getElementById("Date").innerHTML ="民國" + yy + "年" + mm + "月0" + dd + "日";
                             } else {
-                                document.getElementById("Date").innerHTML = yy + "年" + mm + "月" + dd + "日";
+                                document.getElementById("Date").innerHTML ="民國" + yy + "年" + mm + "月" + dd + "日";
                             }
                             //先判斷分和秒是否為個位數，是的話+0
                             var t = document.getElementById("showbox");
