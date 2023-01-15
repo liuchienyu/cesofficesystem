@@ -481,7 +481,7 @@ def law_system_in():
         alert_base_herf = 'announcement'
         alert_base_herf2 = 'upload'
         return render_template("./base/alert_base.html",alert_base=alert_base,alert_base2=alert_base2,alert_base_herf = alert_base_herf,alert_base_herf2=alert_base_herf2)
-    return render_template("./announcement/announcement_in.html")
+    return render_template("./general_management_office/law_system/law_system_in.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

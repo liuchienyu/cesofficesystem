@@ -3,13 +3,13 @@
 <body onload="showDate();showYear();">               
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class=" mb-0 text-gray-800">發布公告系統</h1>
+    <h1 class=" mb-0 text-gray-800">新增法務案件</h1>
 </div>
 
 <!-- Second container -->
-<form method="POST" action="{{url_for('announcement_in')}}"class="row g-3 mb-4">
+<form method="POST" action="{{url_for('law_system_in')}}"class="row g-3 mb-4">
     <div class="col-md-3  mb-4">
-        <label for="inputCity" class="form-label">發布日期</label>
+        <label for="inputCity" class="form-label">新增日期</label>
         <input type="text" class="form-control text-center" name="applyDate" id="applyDate" disabled>
             <script>
                 function showDate() {
@@ -30,11 +30,11 @@
         </input>
       </div>
       <div class="col-md-3">
-        <label for="inputState" class="form-label">公告類別</label>
+        <label for="inputState" class="form-label">案件類別</label>
         <select class="form-select form-select-lg btn btn-outline-info w-100 text-center"
             name="announcement_category" id="announcement_category" aria-label=".form-select-lg example">
             <option selected>請選擇</option>
-            <option value="一般公告">一般公告</option>
+            <option value="一般案件">一般案件</option>
             <option value="財務公告">財務公告</option>
             <option value="人資公告">人資公告</option>
             <option value="會議公告">會議公告</option>
