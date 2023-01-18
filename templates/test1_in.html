@@ -1,0 +1,90 @@
+{% extends "./base/base.html" %}
+{% block body %}
+<body onload="showDate();showYear();">               
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class=" mb-0 text-gray-800">發薪系統</h1>
+</div>
+
+<!-- Second container -->
+<form method="POST" action="{{url_for('finance_person_in')}}"class="row g-3 mb-4">
+    <div class="col-12  mb-4">
+        <label for="inputCity" class="form-label">發放日期</label>
+        <input type="text" class="form-control text-center" name="applyDate" id="applyDate" disabled>
+            <script>
+                function showDate() {
+                    var NowDate = new Date();
+                    var yy = NowDate.getFullYear();
+                    var mm = NowDate.getMonth() + 1;
+                    var dd = NowDate.getDate();
+                    var h = NowDate.getHours();
+                    var m = NowDate.getMinutes();
+                    var s = NowDate.getSeconds();
+                    h = (h < 10) ? "0" + h : h;
+                    m = (m < 10) ? "0" + m : m;
+                    s = (s < 10) ? "0" + s : s;
+                    document.getElementById('applyDate').value = yy + "/" + mm + "/" + dd + " " + h + "：" + m + "：" + s;
+                    setTimeout("showDate()", 1000);
+                }
+            </script> 
+        </input>
+      </div>
+      <div class="col-12 mb-4">
+        <label for="inputZip" class="form-label">發放對象</label>
+            <select class="form-select form-select-lg btn btn-outline-info w-100 text-center"
+            name="id_number" id="id_number" aria-label=".form-select-lg example">
+            <option selected>請選擇</option>
+            <option value="A001">劉建佑</option>
+            <option value="A002">侯正成</option>
+            <option value="A003">陳星維</option>
+            <option value="A004">劉軒志</option>
+            <option value="A005">林彥合</option>
+            <option value="A006">李知恩</option>
+            </select>
+        </div>
+      <div class="col-12 mb-4">
+        <label for="inputState" class="form-label">本薪類別</label>
+        <select class="form-select form-select-lg btn btn-outline-info w-100 text-center"
+            name="Salary" id="Salary" aria-label=".form-select-lg example">
+            <option selected>請選擇</option>
+            <option value="26400">實習</option>
+            <option value="30000">一職等</option>
+            <option value="35000">二職等</option>
+            <option value="41000">三職等</option>
+            <option value="48000">四職等</option>
+            <option value="58000">五職等</option>
+        </select>
+      </div>
+    <div class="col-3 mb-4">
+      <label for="inputAddress" class="form-label">伙食津貼</label>
+      <input type="text" class="form-control" name="food_allowance" id="food_allowance" placeholder="請輸入伙食津貼">
+    </div>
+    <div class="col-3 mb-4">
+      <label for="inputAddress" class="form-label">全勤獎金</label>
+      <input type="text" class="form-control" name="PA_bonus" id="PA_bonus" placeholder="請輸入全勤獎金">
+    </div>
+    <div class="col-3 mb-4">
+      <label for="inputAddress" class="form-label">績效獎金</label>
+      <input type="text" class="form-control" name="performance_bonus" id="performance_bonus" placeholder="請輸入績效獎金">
+    </div>
+    <div class="col-3 mb-4">
+      <label for="inputAddress" class="form-label">職務加給</label>
+      <input type="text" class="form-control" name="job_added" id="job_added" placeholder="請輸入職務加給">
+    </div>
+    <div class="col-3 mb-4">
+      <label for="inputAddress" class="form-label">勞保扣除</label>
+      <input type="text" class="form-control" name="labor_protection" id="labor_protection" placeholder="勞保扣除">
+    </div>
+    <div class="col-3 mb-4">
+      <label for="inputAddress" class="form-label">健保扣除</label>
+      <input type="text" class="form-control" name="health_insurance" id="health_insurance" placeholder="健保扣除">
+    </div>
+    <div class="col-12 mb-4">
+      <button type="#" class="btn btn-primary btn-center">發放</button>
+    </div>
+  </form>
+
+
+
+{% endblock %}
+

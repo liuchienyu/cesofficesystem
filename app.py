@@ -15,6 +15,7 @@ from sqlalchemy.orm import sessionmaker
 from main import User
 import pymongo
 from pymongo import MongoClient
+from finance import money_m,finance_imput
 ################################
 
 
@@ -104,6 +105,7 @@ def home():
     base_info = db.document_code_data
     base_info2 = db.announcement
     base_info3 = db.law_system
+    base_info4 = db.base_info
     count_results = base_info.count_documents({'category':'文號申請'})
     count_results2 = base_info2.count_documents({'category':'公告'})
     count_results3 = base_info3.count_documents({'category':'法務案件'})
@@ -126,6 +128,8 @@ def home():
     code_results4.limit(5)#限制數量
     code_results5.limit(5)#限制數量
 
+    time_money = format(int(money_m(session['user_id'])),',')
+
     return render_template("home.html", 
     count_results= count_results,
     count_results2= count_results2,
@@ -134,7 +138,8 @@ def home():
     code_results2 = code_results2,
     code_results3 = code_results3,
     code_results4 = code_results4,
-    code_results5 = code_results5)
+    code_results5 = code_results5,
+    time_money = time_money)
 
 @app.route("/activity_record")
 @login_required
@@ -502,8 +507,8 @@ def law_system_in():
     if request.method == 'POST':
         a1 = request.values['department']  
         a2 = request.values['applicant']
-        a3=  request.form['subject']
-        a4= request.form['text_in']
+        a3 =  request.form['subject']
+        a4 = request.form['text_in']
         a5 = request.values['law_system_category']
         a6 = request.values['filename']
         law_system_imput(a1, a2,a3,a4,a5,a6)
@@ -521,6 +526,38 @@ def law_system2(search_id):
     base_info = db.law_system
     code_results = base_info.find({'search_id':search_id})
     return render_template('./general_management_office/law_system/law_system_each.html',code_results=code_results)
+
+@app.route("/finance_person")
+@login_required
+def finance_person():
+    time_money = money_m(session['user_id'])
+    db = client.systemdata
+    base_info = db.finance
+    code_results = base_info.find({'id_number':session['user_id']})
+    code_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
+    code_results.limit(10)#限制數量
+    return render_template("./test1.html",code_results=code_results,time_money=time_money)
+
+@app.route("/finance_person_in", methods=['GET', 'POST'])
+@login_required
+def finance_person_in():
+    if request.method == 'POST':
+        a = request.values['id_number']  
+        b = request.values['Salary']
+        c = request.form['food_allowance']
+        d = request.form['PA_bonus']
+        e = request.form['performance_bonus']
+        f = request.form['job_added']
+        g = request.form['labor_protection']
+        h = request.form['health_insurance']
+        finance_imput(a,b,c,d,e,f,g,h)
+        alert_base = '薪水發放完成'
+        alert_base2 = '點此上傳案件附件'
+        alert_base_herf = 'finance_person'
+        alert_base_herf2 = 'upload'
+        return render_template("./base/alert_base.html",alert_base=alert_base,alert_base2=alert_base2,alert_base_herf = alert_base_herf,alert_base_herf2=alert_base_herf2)
+    return render_template("./test1_in.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
