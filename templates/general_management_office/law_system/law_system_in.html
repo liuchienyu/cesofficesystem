@@ -1,99 +1,120 @@
 {% extends "./base/base.html" %}
 {% block body %}
-<body onload="showDate();showYear();">               
-<!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class=" mb-0 text-gray-800">新增法務案件</h1>
-</div>
 
-<!-- Second container -->
-<form method="POST" action="{{url_for('law_system_in')}}"class="row g-3 mb-4">
+<body onload="showDate();showYear();">
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class=" mb-0 text-gray-800">新增法務案件</h1>
+  </div>
+
+  <!-- Second container -->
+  <form method="POST" action="{{url_for('announcement_in')}}" class="row g-3 mb-4">
     <div class="col-md-3  mb-4">
-        <label for="inputCity" class="form-label">新增日期</label>
-        <input type="text" class="form-control text-center" name="applyDate" id="applyDate" disabled>
-            <script>
-                function showDate() {
-                    var NowDate = new Date();
-                    var yy = NowDate.getFullYear();
-                    var mm = NowDate.getMonth() + 1;
-                    var dd = NowDate.getDate();
-                    var h = NowDate.getHours();
-                    var m = NowDate.getMinutes();
-                    var s = NowDate.getSeconds();
-                    h = (h < 10) ? "0" + h : h;
-                    m = (m < 10) ? "0" + m : m;
-                    s = (s < 10) ? "0" + s : s;
-                    document.getElementById('applyDate').value = yy + "/" + mm + "/" + dd + " " + h + "：" + m + "：" + s;
-                    setTimeout("showDate()", 1000);
-                }
-            </script> 
-        </input>
-      </div>
-      <div class="col-md-3">
-        <label for="inputState" class="form-label">案件類別</label>
-        <select class="form-select form-select-lg btn btn-outline-info w-100 text-center"
-            name="announcement_category" id="announcement_category" aria-label=".form-select-lg example">
-            <option selected>請選擇</option>
-            <option value="一般案件">一般案件</option>
-            <option value="財務公告">財務公告</option>
-            <option value="人資公告">人資公告</option>
-            <option value="會議公告">會議公告</option>
-            <option value="解釋公告">解釋公告</option>
-            <option value="命令公告">命令公告</option>
-            <option value="獎懲公告">獎懲公告</option>
-        </select>
-      </div>
-      <div class="col-md-3">
-        <label for="inputState" class="form-label">發布單位</label>
-        <select class="form-select form-select-lg btn btn-outline-info w-100 text-center"
-            name="department" id="department" aria-label=".form-select-lg example">
-            <option selected>請選擇</option>
-            <option value="總管理處">總管理處</option>
-            <option value="監察室">監察室</option>
-            <option value="秘書室">秘書室</option>
-            <option value="財務部">財務部</option>
-            <option value="出納科">出納科</option>
-            <option value="會計科">會計科</option>
-            <option value="人資部">人資部</option>
-            <option value="實習組">實習組</option>
-            <option value="資訊部">資訊部</option>
-            <option value="研發科">研發科</option>
-            <option value="技術科">技術科</option>
-            <option value="研發一組">研發一組</option>
-            <option value="技術一組">技術一組</option>
-        </select>
-      </div>     
-      <div class="col-md-3">
-        <label for="inputZip" class="form-label">發布人</label>
-            <select class="form-select form-select-lg btn btn-outline-info w-100 text-center"
-            name="applicant" id="applicant" aria-label=".form-select-lg example">
-            <option selected>請選擇</option>
-            <option value="劉建佑">劉建佑</option>
-            <option value="侯正成">侯正成</option>
-            <option value="陳星維">陳星維</option>
-            <option value="劉軒志">劉軒志</option>
-            <option value="林彥合">林彥合</option>
-            <option value="李知恩">李知恩</option>
-            </select>
-        </div>
-    <div class="col-12 mb-4">
-      <label for="inputAddress" class="form-label">公告主旨</label>
-      <input type="text" class="form-control" name="subject" id="subject" placeholder="請輸入公告主旨">
+      <label for="inputCity" class="form-label">新增日期</label>
+      <input type="text" class="form-control text-center" name="applyDate" id="applyDate" disabled>
+      <script>
+        function showDate() {
+          var NowDate = new Date();
+          var yy = NowDate.getFullYear() - 1911;
+          var mm = NowDate.getMonth() + 1;
+          var dd = NowDate.getDate();
+          var h = NowDate.getHours();
+          var m = NowDate.getMinutes();
+          var s = NowDate.getSeconds();
+          h = (h < 10) ? "0" + h : h;
+          m = (m < 10) ? "0" + m : m;
+          s = (s < 10) ? "0" + s : s;
+          document.getElementById('applyDate').value = yy + "/" + mm + "/" + dd + " " + h + "：" + m + "：" + s;
+          setTimeout("showDate()", 1000);
+        }
+      </script>
+      </input>
+    </div>
+    <div class="col-md-3">
+      <label for="inputState" class="form-label">案件類別</label>
+      <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" name="announcement_category"
+        id="announcement_category" aria-label=".form-select-lg example" onchange="changeCollege(this.selectedIndex)">
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label for="inputState" class="form-label">案件性質</label>
+      <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" id="sector-list"></select>
+    </div>
+    <script type="text/javascript">
+      var colleges=['請選擇', '憲法案件','刑事案件','民事案件','行政案件','懲戒案件'];
+      var collegeSelect=document.getElementById("announcement_category");
+      var inner="";
+      for(var i=0;i<colleges.length;i++){
+        inner=inner+'<option value=i>'+colleges[i]+'</option>';
+      }
+      collegeSelect.innerHTML=inner;
+
+      var sectors=new Array();
+      sectors[0]=['請選擇'];
+      sectors[1]=['一般', '特殊', '題目'];
+      sectors[2]=['一般', '特殊', '題目'];
+      sectors[3]=['一般', '特殊', '題目'];
+      sectors[4]=['一般', '特殊', '題目'];
+      sectors[5]=['一般', '特殊', '題目'];
+      function changeCollege(index){
+        var Sinner="";
+        for(var i=0;i<sectors[index].length;i++){
+          Sinner=Sinner+'<option value=i>'+sectors[index][i]+'</option>';
+        }
+        var sectorSelect=document.getElementById("sector-list");
+        sectorSelect.innerHTML=Sinner;
+      }
+      changeCollege(document.getElementById("announcement_category").selectedIndex);
+    </script>
+    <div class="col-md-3"></div>
+    <div class="col-md-3">
+      <label for="inputState" class="form-label">發布單位</label>
+      <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" name="department"
+        id="department" aria-label=".form-select-lg example">
+        <option selected>請選擇</option>
+        <option value="總管理處">總管理處</option>
+        <option value="監察室">監察室</option>
+        <option value="秘書室">秘書室</option>
+        <option value="財務部">財務部</option>
+        <option value="出納科">出納科</option>
+        <option value="會計科">會計科</option>
+        <option value="人資部">人資部</option>
+        <option value="實習組">實習組</option>
+        <option value="資訊部">資訊部</option>
+        <option value="研發科">研發科</option>
+        <option value="技術科">技術科</option>
+        <option value="研發一組">研發一組</option>
+        <option value="技術一組">技術一組</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label for="inputZip" class="form-label">發布人</label>
+      <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" name="applicant" id="applicant"
+        aria-label=".form-select-lg example">
+        <option selected>請選擇</option>
+        <option value="劉建佑">劉建佑</option>
+        <option value="侯正成">侯正成</option>
+        <option value="陳星維">陳星維</option>
+        <option value="劉軒志">劉軒志</option>
+        <option value="林彥合">林彥合</option>
+        <option value="李知恩">李知恩</option>
+      </select>
     </div>
     <div class="col-12 mb-4">
-      <h6 class=" mb-0 mb-3 " class="form-label">公告內文</h6>
-      <textarea name="text_in" id="text_in" rows="50" cols="126"placeholder = '請輸入公告內文'></textarea>
+      <label for="inputAddress" class="form-label">案件爭點</label>
+      <input type="text" class="form-control" name="subject" id="subject" placeholder="請輸入案件爭點">
+    </div>
+    <div class="col-12 mb-4">
+      <h6 class=" mb-0 mb-3 " class="form-label">案件事實</h6>
+      <textarea name="text_in" id="text_in" rows="50" cols="126" placeholder='請輸入案件事實'></textarea>
     </div>
     <div class="col-12 mb-4">
       <label for="inputAddress2" class="form-label">附件名稱</label>
       <input type="text" class="form-control" name="filename" id="filename" placeholder="請輸入附件名稱">
     </div>
     <div class="col-12 mb-4">
-      <button type="#" class="btn btn-primary btn-center">發布</button>
+      <button type="#" class="btn btn-primary btn-center">新增</button>
     </div>
   </form>
-
-
-
+</body>
 {% endblock %}
-
