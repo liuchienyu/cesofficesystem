@@ -2,12 +2,12 @@ import datetime
 import time
 from flask import Flask, render_template, redirect, url_for, render_template, request, session, g
 from flask_login import  login_required
-from datetime import timedelta
+from datetime import timedelta,date
 from django.contrib.auth.decorators import login_required
 from flask_sqlalchemy import SQLAlchemy
 import pdfkit, os
 from test_email import sendpaper
-from data_input import announcement_imput, clockin, document_code_data_in
+from data_input import announcement_imput, clockin, document_code_data_in, law_system_imput
 from functools import wraps
 from werkzeug.utils import secure_filename
 from sqlalchemy import create_engine
@@ -103,25 +103,38 @@ def home():
     db = client.systemdata
     base_info = db.document_code_data
     base_info2 = db.announcement
+    base_info3 = db.law_system
     count_results = base_info.count_documents({'category':'文號申請'})
     count_results2 = base_info2.count_documents({'category':'公告'})
+    count_results3 = base_info3.count_documents({'category':'法務案件'})
     code_results = base_info.find({'category':'文號申請'})
     code_results2 = base_info2.find({'category':'公告'})
     code_results3 = base_info2.find({'announcement_category':'財務公告'})
     code_results4 = base_info2.find({'announcement_category':'人資公告'})
+    code_results5 = base_info3.find({'category':'法務案件'})
 
     code_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
     code_results2.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
     code_results3.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
     code_results4.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
+    code_results5.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
 
 
     code_results.limit(5)#限制數量
     code_results2.limit(5)#限制數量
     code_results3.limit(5)#限制數量
     code_results4.limit(5)#限制數量
+    code_results5.limit(5)#限制數量
 
-    return render_template("home.html", count_results= count_results,count_results2= count_results2,code_results = code_results,code_results2 = code_results2,code_results3 = code_results3,code_results4 = code_results4)
+    return render_template("home.html", 
+    count_results= count_results,
+    count_results2= count_results2,
+    count_results3= count_results3,
+    code_results = code_results,
+    code_results2 = code_results2,
+    code_results3 = code_results3,
+    code_results4 = code_results4,
+    code_results5 = code_results5)
 
 @app.route("/activity_record")
 @login_required
@@ -142,7 +155,16 @@ def profile():
     db = client.systemdata
     base_info = db.base_info
     count_results = base_info.find({'id_number':session['user_id']})
-    return render_template('./profile/profile.html',count_results= count_results)
+    results1 = base_info.find_one({'id_number':session['user_id']},{'job_time':1})
+    if 'job_time' in results1:
+        arr = results1['job_time'].split('-')
+        y1=int(arr[0])
+        y2=int(arr[1])
+        y3=int(arr[2])
+        then = date(y1, y2, y3)
+        now = date.today()
+        count_results2 = str((now - then).days*8) +'小時'
+    return render_template('./profile/profile.html',count_results= count_results,count_results2= count_results2)
 
 @app.route("/more")
 @login_required
@@ -150,7 +172,16 @@ def more():
     db = client.systemdata
     base_info = db.base_info
     count_results = base_info.find({'id_number':session['user_id']})
-    return render_template("./profile/more_profile.html",count_results= count_results)
+    results1 = base_info.find_one({'id_number':session['user_id']},{'job_time':1})
+    if 'job_time' in results1:
+        arr = results1['job_time'].split('-')
+        y1=int(arr[0])
+        y2=int(arr[1])
+        y3=int(arr[2])
+        then = date(y1, y2, y3)
+        now = date.today()
+        count_results2 = str((now - then).days*8) +'小時'
+    return render_template("./profile/more_profile.html",count_results= count_results,count_results2= count_results2)
 
 
 @app.route("/download")
@@ -449,8 +480,8 @@ def meeting_minutes2(search_id):
 @login_required
 def law_system():
     db = client.systemdata
-    base_info = db.announcement
-    code_results = base_info.find({'category':'公告'})
+    base_info = db.law_system
+    code_results = base_info.find({'category':'法務案件'})
     code_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
     code_results.limit(10)#限制數量
     return render_template("./general_management_office/law_system/law_system.html",code_results=code_results)
@@ -473,15 +504,23 @@ def law_system_in():
         a2 = request.values['applicant']
         a3=  request.form['subject']
         a4= request.form['text_in']
-        a5 = request.values['announcement_category']
+        a5 = request.values['law_system_category']
         a6 = request.values['filename']
-        announcement_imput(a1, a2,a3,a4,a5,a6)
-        alert_base = '公告發布完成'
-        alert_base2 = '點此上傳公告附件'
-        alert_base_herf = 'announcement'
+        law_system_imput(a1, a2,a3,a4,a5,a6)
+        alert_base = '案件新增完成'
+        alert_base2 = '點此上傳案件附件'
+        alert_base_herf = 'law_system'
         alert_base_herf2 = 'upload'
         return render_template("./base/alert_base.html",alert_base=alert_base,alert_base2=alert_base2,alert_base_herf = alert_base_herf,alert_base_herf2=alert_base_herf2)
     return render_template("./general_management_office/law_system/law_system_in.html")
+
+@app.route('/law_system/<search_id>')
+@login_required
+def law_system2(search_id):
+    db = client.systemdata
+    base_info = db.law_system
+    code_results = base_info.find({'search_id':search_id})
+    return render_template('./general_management_office/law_system/law_system_each.html',code_results=code_results)
 
 if __name__ == "__main__":
     app.run(debug=True)

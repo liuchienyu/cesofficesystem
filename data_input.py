@@ -141,3 +141,37 @@ def announcement_imput(a,b,c,d,e,f):
     }
 
     announcement_result = announcement.insert_one(post)
+
+def law_system_imput(a,b,c,d,e,f):
+    db = client.systemdata
+    law_system = db.law_system
+    law_system_results = law_system.find({'category':'法務案件'},{'_id':1})
+    law_system_results.sort("make_time",pymongo.DESCENDING)#按照時間降序排列
+    law_system_results.limit(1)#限制數量
+    print(law_system_results[0])
+
+    #計算文件數量並編號
+    if law_system_results != None:
+        id = 0
+        while law_system_results != None:
+            law_system_results = law_system.find_one({'_id':id})
+
+            id=law_system.count_documents({'category':'法務案件'},)+1
+        else:
+            print(id)
+
+    post = {"_id":id,
+    "make_time":datetime.datetime.now(), 
+    "code_date":time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), 
+    'unit':a,
+    'who':b,
+    'subject':c,
+    'text_in':d,
+    "search_date":time.strftime("%Y-%m-%d", time.localtime()),
+    'category':'法務案件',
+    'law_system_category':e,
+    'filename':f,
+    'search_id':'F'+str(id)
+    }
+
+    law_system_result = law_system.insert_one(post)

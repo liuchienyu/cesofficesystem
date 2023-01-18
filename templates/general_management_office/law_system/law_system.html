@@ -14,7 +14,7 @@
         <table class="table table-hover text-nowrap">
             <thead>
                 <tr>
-                    <td class="h2" colspan='5' id="title">公告</td>
+                    <td class="h2" colspan='5' id="title">案件清單</td>
                 </tr>
                 <tr>
                     <th>發布日期</th>
@@ -29,8 +29,8 @@
                     <tr>
                     <td class="text-primary">{{i['code_date']}}</td>
                     <td>{{i['unit']}}</td>
-                    <td>{{i['announcement_category']}}</td>
-                    <td><a href="announcement/{{i['search_id']}}"><p>{{i['subject']}}</p></a></td>
+                    <td>{{i['law_system_category']}}</td>
+                    <td><a href="law_system/{{i['search_id']}}"><p>{{i['subject']}}</p></a></td>
                     </tr>
                 </tbody>
                 {%endfor%}

@@ -8,7 +8,7 @@
   </div>
 
   <!-- Second container -->
-  <form method="POST" action="{{url_for('announcement_in')}}" class="row g-3 mb-4">
+  <form method="POST" action="{{url_for('law_system_in')}}" class="row g-3 mb-4">
     <div class="col-md-3  mb-4">
       <label for="inputCity" class="form-label">新增日期</label>
       <input type="text" class="form-control text-center" name="applyDate" id="applyDate" disabled>
@@ -32,8 +32,8 @@
     </div>
     <div class="col-md-3">
       <label for="inputState" class="form-label">案件類別</label>
-      <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" name="announcement_category"
-        id="announcement_category" aria-label=".form-select-lg example" onchange="changeCollege(this.selectedIndex)">
+      <select class="form-select form-select-lg btn btn-outline-info w-100 text-center" name="law_system_category"
+        id="law_system_category" aria-label=".form-select-lg example" onchange="changeCollege(this.selectedIndex)">
       </select>
     </div>
     <div class="col-md-3">
@@ -42,7 +42,7 @@
     </div>
     <script type="text/javascript">
       var colleges=['請選擇', '憲法案件','刑事案件','民事案件','行政案件','懲戒案件'];
-      var collegeSelect=document.getElementById("announcement_category");
+      var collegeSelect=document.getElementById("law_system_category");
       var inner="";
       for(var i=0;i<colleges.length;i++){
         inner=inner+'<option value=i>'+colleges[i]+'</option>';
@@ -64,7 +64,7 @@
         var sectorSelect=document.getElementById("sector-list");
         sectorSelect.innerHTML=Sinner;
       }
-      changeCollege(document.getElementById("announcement_category").selectedIndex);
+      changeCollege(document.getElementById("law_system_category").selectedIndex);
     </script>
     <div class="col-md-3"></div>
     <div class="col-md-3">

@@ -336,6 +336,39 @@
                 </div>
             </div>
         </div>
+        <!-- Illustrations -->
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">法務系統</h6>
+            </div>
+            <div class="card-body">
+                <div class="chart-area">
+                    <div class=" mx-auto table-responsive-sm row text-center ">
+                        <table class="table table-hover text-nowrap ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">發布日期</th>
+                                    <th scope="col">主旨</th>
+                                    <th scope="col">發布人</th>
+                                </tr>
+                            </thead>
+                            <li class='list-unstyled justify-content-between d-flex h6'>
+                                {%for a in code_results5%}
+                                <tbody id="myTable5">
+                                    <tr>
+                                    <td class="text-primary">{{a['code_date']}}</td>                                        
+                                    <td><a href="/law_system/{{a['search_id']}}"><p style='width: 100px;'>{{a['subject']}}</p></a></td>
+                                    <td>{{a['who']}}</td>
+                                    </tr>
+                                </tbody>
+                                {%endfor%}
+                                </li>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!-- /.container-fluid -->
