@@ -45,7 +45,7 @@
       var collegeSelect=document.getElementById("law_system_category");
       var inner="";
       for(var i=0;i<colleges.length;i++){
-        inner=inner+'<option value=i>'+colleges[i]+'</option>';
+        inner=inner+'<option value='+colleges[i]+'>'+colleges[i]+'</option>';
       }
       collegeSelect.innerHTML=inner;
 
@@ -59,7 +59,7 @@
       function changeCollege(index){
         var Sinner="";
         for(var i=0;i<sectors[index].length;i++){
-          Sinner=Sinner+'<option value=i>'+sectors[index][i]+'</option>';
+          Sinner=Sinner+'<option value='+sectors[index][i]+'>'+sectors[index][i]+'</option>';
         }
         var sectorSelect=document.getElementById("sector-list");
         sectorSelect.innerHTML=Sinner;
