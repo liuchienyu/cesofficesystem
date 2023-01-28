@@ -511,7 +511,8 @@ def law_system_in():
         a4 = request.form['text_in']
         a5 = request.values['law_system_category']
         a6 = request.values['filename']
-        law_system_imput(a1, a2,a3,a4,a5,a6)
+        a7 = request.values['law_system_category2']
+        law_system_imput(a1, a2,a3,a4,a5,a6,a7)
         alert_base = '案件新增完成'
         alert_base2 = '點此上傳案件附件'
         alert_base_herf = 'law_system'

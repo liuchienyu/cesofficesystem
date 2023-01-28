@@ -142,7 +142,7 @@ def announcement_imput(a,b,c,d,e,f):
 
     announcement_result = announcement.insert_one(post)
 
-def law_system_imput(a,b,c,d,e,f):
+def law_system_imput(a,b,c,d,e,f,g):
     db = client.systemdata
     law_system = db.law_system
     law_system_results = law_system.find({'category':'法務案件'},{'_id':1})
@@ -171,7 +171,8 @@ def law_system_imput(a,b,c,d,e,f):
     'category':'法務案件',
     'law_system_category':e,
     'filename':f,
-    'search_id':'F'+str(id)
+    'search_id':'F'+str(id),
+    'law_system_category2': g
     }
 
     law_system_result = law_system.insert_one(post)
