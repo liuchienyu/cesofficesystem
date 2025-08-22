@@ -1,8 +1,9 @@
 {% extends "./base/base.html" %}
 {% block body %}
 {%for i in code_results%}
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class=" mb-0 text-gray-800">{{i['subject']}}</h1>
+<div class="raw d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="col-11 mb-0 text-gray-800">{{i['subject']}}</h1>
+    <a class="col-1 btn btn-outline-info" href = "/law_system">返回</a>
 </div>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h6 class=" mb-0 text-gray-800">公告分類：{{i['law_system_category']}}  ,  發布單位：{{i['unit']}}  {{i['who']}}</h6>
