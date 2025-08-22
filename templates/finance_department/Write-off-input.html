@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>財務核銷輸入系統</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  <div class="p-6 max-w-3xl mx-auto">
+    <h1 class="text-2xl font-bold mb-4">財務核銷輸入</h1>
+
+    <!-- 表單 -->
+    <form id="finance-form" class="grid gap-4 bg-white p-4 rounded-xl shadow">
+      <input type="text" name="project_name" placeholder="專案名稱" class="border p-2 rounded" required />
+      <input type="text" name="category" placeholder="支出類別" class="border p-2 rounded" required />
+      <input type="number" name="amount" placeholder="金額" class="border p-2 rounded" required />
+      <input type="text" name="payment_method" placeholder="付款方式" class="border p-2 rounded" required />
+      <textarea name="remark" placeholder="備註" class="border p-2 rounded"></textarea>
+      <input type="file" name="receipt" />
+
+      <button type="submit" class="bg-blue-600 text-white p-2 rounded hover:bg-blue-700">
+        提交
+      </button>
+    </form>
+
+    <!-- 紀錄清單 -->
+    <h2 class="text-xl font-semibold mt-6 mb-2">已輸入紀錄</h2>
+    <table class="w-full border bg-white rounded shadow">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="border p-2">專案</th>
+          <th class="border p-2">類別</th>
+          <th class="border p-2">金額</th>
+          <th class="border p-2">付款方式</th>
+          <th class="border p-2">備註</th>
+          <th class="border p-2">日期</th>
+        </tr>
+      </thead>
+      <tbody id="records-table"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const API_URL = "http://localhost:8000/finance/records"; // FastAPI 後端 API
+
+    // 取得紀錄
+    async function fetchRecords() {
+      const res = await fetch(API_URL);
+      const data = await res.json();
+      const table = document.getElementById("records-table");
+      table.innerHTML = "";
+      data.forEach(r => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td class="border p-2">${r.project_name}</td>
+          <td class="border p-2">${r.category}</td>
+          <td class="border p-2">${r.amount}</td>
+          <td class="border p-2">${r.payment_method}</td>
+          <td class="border p-2">${r.remark || ""}</td>
+          <td class="border p-2">${new Date(r.created_at).toLocaleString()}</td>
+        `;
+        table.appendChild(tr);
+      });
+    }
+
+    // 表單提交
+    document.getElementById("finance-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      await fetch(API_URL, {
+        method: "POST",
+        body: formData,
+      });
+      e.target.reset();
+      fetchRecords();
+    });
+
+    // 初始載入
+    fetchRecords();
+  </script>
+</body>
+</html>

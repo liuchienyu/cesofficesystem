@@ -16,6 +16,8 @@ from main import User
 import pymongo
 from pymongo import MongoClient
 from finance import money_m,finance_imput
+from flask import jsonify, send_from_directory
+from bson.objectid import ObjectId
 ################################
 
 
@@ -42,7 +44,7 @@ users=db_session.query(User.username,User.id_name,User.id_sex,User.id_birth,User
 
 
 #datebase2
-CONNECTION_STRING ="mongodb+srv://dandy40605:1234@cluster0.qqbqe.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+CONNECTION_STRING ="mongodb+srv://dandy40605:dandy1234@cluster0.qqbqe.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 client = MongoClient(CONNECTION_STRING,tls=True, tlsAllowInvalidCertificates=True,tz_aware=True )#tls=True, tlsAllowInvalidCertificates=True為解決無法連線問題
 
 
@@ -283,6 +285,87 @@ def finance_in():
 @login_required
 def finance_check():
     return render_template("./finance_department/finance_check.html")
+
+
+@app.route("/finance_records", methods=["POST",'GET'])
+@login_required
+def finance_records_page():
+    return render_template("./finance_department/Write-off-input.html")
+def finance_records_create():
+    #接收表單欄位：
+    #- project_name (str)
+    #- category (str)
+    #- amount (number)
+    #- payment_method (str)
+    #- remark (str, optional)
+    #- receipt (file, optional)
+    #儲存到 MongoDB：systemdata.finance_reimbursements
+    dbm = client.systemdata
+    col = dbm.finance_reimbursements
+
+    project_name = request.form.get("project_name", "").strip()
+    category = request.form.get("category", "").strip()
+    amount_raw = request.form.get("amount", "0").strip()
+    payment_method = request.form.get("payment_method", "").strip()
+    remark = request.form.get("remark", "").strip()
+
+    # 基本驗證
+    if not project_name or not category or not amount_raw or not payment_method:
+        return jsonify({"error": "缺少必要欄位"}), 400
+
+    # 金額轉 float
+    try:
+        amount = float(amount_raw)
+    except ValueError:
+        return jsonify({"error": "金額格式錯誤"}), 400
+
+    # 處理上傳檔案（可選）
+    file_path = None
+    if "receipt" in request.files:
+        f = request.files["receipt"]
+        if f and f.filename:
+            filename = secure_filename(f.filename)
+            save_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+            f.save(save_path)
+            # 儲存相對路徑，方便前端引用
+            file_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+
+    doc = {
+        "category": "財務核銷",             # 方便你後台分類
+        "project_name": project_name,
+        "category_name": category,          # 避免和上面 category 混淆，也存一份細項名稱
+        "amount": amount,
+        "payment_method": payment_method,
+        "receipt_file": file_path,
+        "remark": remark,
+        "operator": session.get("user_id"), # 紀錄誰送的
+        "created_at": datetime.datetime.now(tz).isoformat(),
+    }
+
+    result = col.insert_one(doc)
+    return jsonify({"message": "Record created", "id": str(result.inserted_id)}), 201
+
+def finance_records_list():
+    #回傳最新核銷紀錄，供前端表格渲染
+    dbm = client.systemdata
+    col = dbm.finance_reimbursements
+
+    # 依時間排序，最新在前
+    cursor = col.find({}).sort("created_at", pymongo.DESCENDING)
+    records = []
+    for r in cursor:
+        records.append({
+            "id": r.get("id"),
+            "project_name": r.get("project_name"),
+            "category": r.get("category_name"),         # 前端表格的 category
+            "amount": r.get("amount"),
+            "payment_method": r.get("payment_method"),
+            "remark": r.get("remark"),
+            "created_at": r.get("created_at"),
+            "receipt_file": r.get("receipt_file"),
+            "operator": r.get("operator"),
+        })
+    return jsonify(records), 200
 
 @app.route("/Leave")
 @login_required
@@ -558,6 +641,8 @@ def finance_person_in():
         alert_base_herf2 = 'upload'
         return render_template("./base/alert_base.html",alert_base=alert_base,alert_base2=alert_base2,alert_base_herf = alert_base_herf,alert_base_herf2=alert_base_herf2)
     return render_template("./test1_in.html")
+
+
 
 
 if __name__ == "__main__":
